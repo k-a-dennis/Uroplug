@@ -601,7 +601,7 @@ p {
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   color: var(--color-dark-gray);
-  max-width: 580px;
+  max-width: 650px;
   margin-bottom: var(--space-lg);
   line-height: 1.6;
 }
