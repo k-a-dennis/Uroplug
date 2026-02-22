@@ -186,3 +186,32 @@ function initParallax() {
 
 // Initialize parallax if elements exist
 initParallax();
+
+
+/* --- SCROLL-TRIGGERED VIDEO PLAYBACK --- */
+function initScrollVideo() {
+  const videos = document.querySelectorAll('[data-play-on-scroll]');
+
+  if (!videos.length) return;
+
+  videos.forEach(video => {
+    video.pause();
+    video.currentTime = 0;
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.currentTime = 0;
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  videos.forEach(video => observer.observe(video));
+}
+
+initScrollVideo();
