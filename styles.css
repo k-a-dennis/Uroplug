@@ -120,7 +120,7 @@ h1 {
   font-size: clamp(2.8rem, 6vw, 4.5rem);
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--color-secondary-dark);
+  color: var(--color-primary-muted);
 }
 
 h2 {
@@ -600,7 +600,7 @@ p {
 .hero__subtitle {
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: var(--color-dark-gray);
+  color: var(--color-light-gray);
   max-width: 650px;
   margin-bottom: var(--space-lg);
   line-height: 1.6;
