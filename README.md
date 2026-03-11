@@ -5,22 +5,22 @@ A sleek, static website for Uroplug, a developing medical device to treat chroni
 
 ---
 
-## ✨ Features
+## Features
 * **Fully Responsive:** Works on mobile, tablet, and desktop.
 * **Interactive Contact Form:** Built with custom JavaScript validation.
 
-## 🛠️ Built With
+## Built With
 * **HTML5:** Semantic structure.
 * **CSS3:** Custom properties and Flexbox/Grid.
 * **JavaScript:** Parallax, scroll reveal animations, and count-up animations.
 
-## 📸 Screenshot
+## Screenshot
 ![Project Screenshot](./path-to-image/screenshot.png)
 
-## 🚀 Getting Started
+## Getting Started
 To run this project locally:
 1. Clone the repo: `git clone https://github.com/k-a-dennis/Uroplug`
 2. Open `index.html` in your browser.
 
-## 👤 Author
+## Author
 * **Kyle Dennis** - [GitHub](https://github.com/k-a-dennis) | [LinkedIn](https://linkedin.com/in/kdennis89)
