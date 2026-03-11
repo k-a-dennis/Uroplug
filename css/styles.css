@@ -16,6 +16,7 @@
   --color-secondary: #2D3E50;
   --color-secondary-light: #3E5468;
   --color-secondary-dark: #1A2634;
+  --color-secondary-scheme: #1ca18b; 
 
   /* Accent — warm coral for CTAs */
   --color-accent: #E8734A;
@@ -467,6 +468,7 @@ p {
 .section--off-white { background: var(--color-off-white); }
 .section--light { background: var(--color-light-gray); }
 .section--primary-muted { background: var(--color-primary-muted); }
+.section--secondary-scheme { background: var(--color-secondary-scheme); }
 
 .section--dark {
   background: var(--color-secondary-dark);
