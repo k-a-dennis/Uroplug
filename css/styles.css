@@ -121,7 +121,7 @@ h1 {
   font-size: clamp(2.8rem, 6vw, 4.5rem);
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--color-primary-muted);
+  color: var(--color-white);
 }
 
 h2 {
@@ -382,7 +382,8 @@ p {
   color: var(--color-white);
 }
 .btn--primary:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-white);
+  color: var(--color-primary);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(10, 107, 92, 0.25);
 }
@@ -400,11 +401,12 @@ p {
 .btn--outline {
   background: var(--color-white);
   color: var(--color-primary);
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-white);
 }
 .btn--outline:hover {
   background: var(--color-primary-dark);
   color: var(--color-white);
+  border: 2px solid var(--color-primary-dark);
   transform: translateY(-2px);
 }
 
@@ -683,6 +685,45 @@ p {
   stroke: var(--color-primary);
 }
 
+/* Mission video background section */
+.section--mission-video {
+  position: relative;
+  overflow: hidden;
+  min-height: 120vh;
+  background: var(--color-secondary-dark);
+}
+
+.mission-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.mission-bg-video__overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 1;
+}
+
+.section--mission-video .container {
+  position: relative;
+  z-index: 2;
+}
+
+.section--mission-video h2,
+.section--mission-video p {
+  color: var(--color-white);
+}
+
+.section--mission-video .label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
 /* Floating image wrapper */
 .floating-image {
   position: absolute;
@@ -752,10 +793,10 @@ p {
 }
 
 .card__icon--accent {
-  background: rgba(232, 115, 74, 0.12);
+  background: var(--color-primary-muted);
 }
 .card__icon--accent svg {
-  stroke: var(--color-accent);
+  stroke: var(--color-primary);
 }
 
 .card h3 {
