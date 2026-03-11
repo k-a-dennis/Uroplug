@@ -687,6 +687,7 @@ p {
 .section--mission-video {
   position: relative;
   overflow: hidden;
+  min-height: 90vh;
   background: var(--color-secondary-dark);
 }
 
