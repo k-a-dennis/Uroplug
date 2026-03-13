@@ -339,6 +339,13 @@ p {
 
 .nav__mobile--open { display: flex; flex-direction: column; }
 
+/* Ensure nav bar itself has a solid background whenever mobile menu is open */
+.nav:has(.nav__mobile--open) {
+  background: rgba(247, 250, 249, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 .nav__mobile-links {
   list-style: none;
   display: flex;
