@@ -689,7 +689,7 @@ p {
 .section--mission-video {
   position: relative;
   overflow: hidden;
-  min-height: 120vh;
+  min-height: 130vh;
   background: var(--color-secondary-dark);
 }
 
@@ -715,14 +715,11 @@ p {
   z-index: 2;
 }
 
-.section--mission-video h2,
+
 .section--mission-video p {
-  color: var(--color-white);
+  color: var(--color-primary);
 }
 
-.section--mission-video .label {
-  color: rgba(255, 255, 255, 0.75);
-}
 
 /* Floating image wrapper */
 .floating-image {
