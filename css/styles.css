@@ -1346,6 +1346,13 @@ p {
 }
 
 @media (max-width: 768px) {
+  .mission-bg-video {
+    object-position: center center;
+    transform: scale(2);
+  }
+}
+
+@media (max-width: 768px) {
   .nav__links { display: none; }
   .nav__cta--desktop { display: none; }
   .nav__toggle { display: flex; }
