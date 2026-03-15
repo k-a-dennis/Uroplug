@@ -695,15 +695,15 @@ p {
   stroke: var(--color-primary);
 }
 
-/* Mission video background section */
-.section--mission-video {
+/* Product video background section */
+.section--product-video {
   position: relative;
   overflow: hidden;
-  min-height: 130vh;
+  min-height: 95vh;
   background: var(--color-secondary-dark);
 }
 
-.mission-bg-video {
+.product-bg-video {
   position: absolute;
   top: 0;
   left: 0;
@@ -713,20 +713,20 @@ p {
   z-index: 0;
 }
 
-.mission-bg-video__overlay {
+.product-bg-video__overlay {
   position: absolute;
   inset: 0;
   background: transparent;
   z-index: 1;
 }
 
-.section--mission-video .container {
+.section--product-video .container {
   position: relative;
   z-index: 2;
 }
 
 
-.section--mission-video p {
+.section--product-video p {
   color: var(--color-primary);
 }
 
@@ -1339,7 +1339,7 @@ p {
 }
 
 @media (max-width: 768px) {
-  .mission-bg-video {
+  .product-bg-video {
     object-position: center center;
     transform: scale(0.001);
   }
