@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordions();
   initCountUp();
   highlightActiveNav();
-  initScrollVideo();
 });
 
 /* --- NAVIGATION --- */
@@ -204,13 +203,16 @@ function initScrollVideo() {
     entries.forEach(entry => {
       const video = entry.target;
       if (entry.isIntersecting) {
+        video.currentTime = 0;
         video.load();
-        video.play().catch(() => {});
+        video.play();
       } else {
         video.pause();
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.3 });
 
   videos.forEach(video => observer.observe(video));
 }
+
+initScrollVideo();
