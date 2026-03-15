@@ -19,11 +19,12 @@ function initNav() {
 
   // Scroll-based nav background
   const onScroll = () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('nav--scrolled');
-    } else {
-      nav.classList.remove('nav--scrolled');
-    }
+    if (window.innerWidth > 768) {
+      if (window.scrollY > 40) {
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.remove('nav--scrolled');
+      }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
