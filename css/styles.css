@@ -1341,7 +1341,7 @@ p {
 @media (max-width: 768px) {
   .product-bg-video {
     object-position: center center;
-    transform: scale(0.001);
+    transform: scale(1.5);
   }
 }
 
