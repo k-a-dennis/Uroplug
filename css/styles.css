@@ -219,16 +219,6 @@ p {
   box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
 }
 
-/* On mobile, nav bar is always solid white */
-@media (max-width: 768px) {
-  .nav {
-    background: rgba(247, 250, 249, 0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
-  }
-}
-
 .nav__inner {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -349,11 +339,14 @@ p {
 
 .nav__mobile--open { display: flex; flex-direction: column; }
 
-/* Ensure nav bar has a solid background whenever mobile menu is open */
-.nav:has(.nav__mobile--open) {
-  background: rgba(247, 250, 249, 0.97);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* On mobile, nav bar is always solid white */
+@media (max-width: 768px) {
+  .nav {
+    background: rgba(247, 250, 249, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
+  }
 }
 
 .nav__mobile-links {
@@ -1348,7 +1341,7 @@ p {
 @media (max-width: 768px) {
   .mission-bg-video {
     object-position: center center;
-    transform: scale(2);
+    transform: scale(0.001);
   }
 }
 
