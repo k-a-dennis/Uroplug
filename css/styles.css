@@ -235,6 +235,7 @@ p1 {
   color: var(--color-secondary);
 }
 
+/* Mobile fix for white navbar background */
 .nav:not(.nav--scrolled) .nav__toggle span {
   background: var(--color-white);
 }
