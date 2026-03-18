@@ -618,6 +618,8 @@ p {
   max-width: 650px;
   margin-bottom: var(--space-lg);
   line-height: 1.6;
+  letter-spacing: -0.02em;
+  font-weight: 300;  
 }
 
 .hero__actions {
