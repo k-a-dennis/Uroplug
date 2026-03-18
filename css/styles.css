@@ -149,6 +149,12 @@ p {
   max-width: 68ch;
 }
 
+p1 {
+  font-size: 1.05rem;
+  color: var(--color-off-white);
+  max-width: 68ch;
+}
+
 .text-sm { font-size: 0.9rem; }
 .text-lg { font-size: 1.2rem; }
 .text-xl { font-size: 1.4rem; line-height: 1.5; }
