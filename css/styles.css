@@ -226,14 +226,12 @@ p1 {
 }
 
 /* White links on page load (no scroll class present) */
-.nav:not(.nav--scrolled) .nav__link,
-.nav:not(.nav--scrolled) .nav__logo {
+.nav:not(.nav--scrolled) .nav__link {
   color: var(--color-white);
 }
 
 /* Restore default color once scrolled */
-.nav--scrolled .nav__link,
-.nav--scrolled .nav__logo {
+.nav--scrolled .nav__link {
   color: var(--color-secondary);
 }
 
