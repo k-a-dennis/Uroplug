@@ -235,6 +235,10 @@ p1 {
   color: var(--color-secondary);
 }
 
+.nav:not(.nav--scrolled) .nav__toggle span {
+  background: var(--color-white);
+}
+
 .nav__inner {
   max-width: var(--max-width);
   margin: 0 auto;
