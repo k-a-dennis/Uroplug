@@ -225,6 +225,16 @@ p1 {
   box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
 }
 
+/* White links on page load (no scroll class present) */
+.nav:not(.nav--scrolled) .nav__link {
+  color: var(--color-white);
+}
+
+/* Restore default color once scrolled */
+.nav--scrolled .nav__link {
+  color: var(--color-secondary);
+}
+
 .nav__inner {
   max-width: var(--max-width);
   margin: 0 auto;
