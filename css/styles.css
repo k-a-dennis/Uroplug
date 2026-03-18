@@ -370,6 +370,18 @@ p1 {
   }
 }
 
+/* Remove nav link color change on mobile */
+@media (min-width: 769px) {
+  .nav:not(.nav--scrolled) .nav__link,
+  .nav:not(.nav--scrolled) .nav__logo {
+    color: var(--color-white);
+  }
+
+  .nav:not(.nav--scrolled) .nav__toggle span {
+    background: var(--color-white);
+  }
+}
+
 .nav__mobile-links {
   list-style: none;
   display: flex;
