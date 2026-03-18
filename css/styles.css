@@ -481,6 +481,7 @@ p {
 .section--light { background: var(--color-light-gray); }
 .section--primary-muted { background: var(--color-primary-muted); }
 .section--secondary-scheme { background: var(--color-secondary-scheme); }
+.section--primary-gradient { background: linear-gradient(135deg, rgba(176, 231, 213, 0.85), rgba(27, 77, 60, 0.85))}
 
 .section--dark {
   background: var(--color-secondary-dark);
