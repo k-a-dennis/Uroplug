@@ -372,8 +372,7 @@ p1 {
 
 /* Remove nav link color change on mobile */
 @media (min-width: 769px) {
-  .nav:not(.nav--scrolled) .nav__link,
-  .nav:not(.nav--scrolled) .nav__logo {
+  .nav:not(.nav--scrolled) .nav__link {
     color: var(--color-white);
   }
 
