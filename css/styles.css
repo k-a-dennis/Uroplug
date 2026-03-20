@@ -1376,9 +1376,7 @@ p1 {
 
 @media (max-width: 768px) {
   .product-bg-video {
-    object-position: center center;
-    object-fit: contain;
-    transform: scale(0.75);
+    transform: scale(1.1);
   }
 }
 
