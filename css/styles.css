@@ -1262,6 +1262,10 @@ p1 {
   background: var(--color-primary);
 }
 
+.gradient-orb--secondary {
+  background: var(--color-primary-dark);
+}
+
 .gradient-orb--accent {
   background: var(--color-accent);
 }
