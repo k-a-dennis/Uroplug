@@ -138,6 +138,14 @@ h4 {
   font-weight: 600;
 }
 
+h5 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--color-primary-dark)
+}
+
 p {
   font-size: 1.05rem;
   color: var(--color-dark-gray);
@@ -943,7 +951,7 @@ p1 {
 
 .timeline__date {
   font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-size: 1.03rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-primary);
