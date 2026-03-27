@@ -943,11 +943,20 @@ p1 {
 
 .timeline__date {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 1.05rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-primary);
   margin-bottom: 4px;
+}
+
+.timeline__eta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary-light);
+  margin-bottom: 3px;
 }
 
 /* --- TEAM GRID --- */
