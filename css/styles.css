@@ -370,10 +370,14 @@ p1 {
 /* On mobile, nav bar is always solid white */
 @media (max-width: 768px) {
   .nav {
-    background: rgba(247, 250, 249, 0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: #FFFFFF !important;
     box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
+    transition: none;
+  }
+  .nav--scrolled {
+    background: #FFFFFF !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 

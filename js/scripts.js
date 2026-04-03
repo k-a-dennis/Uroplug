@@ -21,8 +21,9 @@ function initNav() {
   const onScroll = () => {
     if (window.innerWidth > 768) {
       nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+    } else {
+      nav.classList.remove('nav--scrolled'); // strip it if viewport shrinks
     }
-    // On mobile: do nothing. CSS handles it permanently.
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
