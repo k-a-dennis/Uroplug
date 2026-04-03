@@ -18,13 +18,11 @@ function initNav() {
   const toggle = document.querySelector('.nav__toggle');
   const mobileMenu = document.querySelector('.nav__mobile');
 
-  // Scroll-based nav background
   const onScroll = () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('nav--scrolled');
-    } else {
-      nav.classList.remove('nav--scrolled');
+    if (window.innerWidth > 768) {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 40);
     }
+    // On mobile: do nothing. CSS handles it permanently.
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
