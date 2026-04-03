@@ -221,19 +221,28 @@ p1 {
   transition: background var(--transition-medium), box-shadow var(--transition-medium);
 }
 
-.nav--scrolled {
-  background: rgba(247, 250, 249, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
+/* Desktop-only navbar settings */
+@media (min-width: 769px) {
+  .nav--scrolled {
+    background: rgba(247, 250, 249, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
+  }
 }
 
-/* White links on page load (no scroll class present) */
-.nav:not(.nav--scrolled) .nav__link {
-  color: var(--color-white);
+/* White links on page load — desktop only (transparent nav state) */
+@media (min-width: 769px) {
+  .nav:not(.nav--scrolled) .nav__link {
+    color: var(--color-white);
+  }
+
+  .nav:not(.nav--scrolled) .nav__toggle span {
+    background: var(--color-white);
+  }
 }
 
-/* Restore default color once scrolled */
+/* Restore default color once scrolled — all breakpoints */
 .nav--scrolled .nav__link {
   color: var(--color-secondary);
 }
@@ -365,17 +374,6 @@ p1 {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 1px 0 rgba(10, 107, 92, 0.08);
-  }
-}
-
-/* Remove nav link color change on mobile */
-@media (min-width: 769px) {
-  .nav:not(.nav--scrolled) .nav__link {
-    color: var(--color-white);
-  }
-
-  .nav:not(.nav--scrolled) .nav__toggle span {
-    background: var(--color-white);
   }
 }
 
