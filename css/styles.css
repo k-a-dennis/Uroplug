@@ -146,6 +146,12 @@ h5 {
   color: var(--color-primary-dark)
 }
 
+h6 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.25vw, 1.5rem);
+  font-weight: 600;
+}
+
 p {
   font-size: 1.05rem;
   color: var(--color-dark-gray);
