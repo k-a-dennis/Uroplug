@@ -667,6 +667,47 @@ p1 {
   flex-wrap: wrap;
 }
 
+/* --- HERO BLEED IMAGE (Development page) --- */
+
+/* The section wrapper needs overflow visible so the image can escape */
+.hero-bleed-wrap {
+  overflow: visible;
+}
+
+/* Split the hero content into text left, image right */
+.hero__content--split {
+  display: flex;
+  align-items: flex-end; /* anchor both to bottom so image bleeds down naturally */
+  gap: var(--space-xl);
+}
+
+/* The bleeding image container */
+.hero__bleed-image {
+  position: relative;
+  flex: 0 0 50%;           /* takes up ~50% of hero width */
+  max-width: 480px;
+  z-index: 10;
+
+  /* The bleed: image is 100% tall, but pushed down so ~20% hangs below */
+  margin-bottom: -28%;     /* pulls it down into the next section */
+  align-self: flex-end;
+}
+
+.hero__bleed-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+  aspect-ratio: 2 / 3;    /* vertical/portrait orientation */
+  display: block;
+}
+
+/* Give the Overview section room for the bleed */
+.section--white:has(.section__header) {
+  padding-top: calc(var(--space-3xl) + 7%);
+}
+
 /* --- MEDIA CONTAINERS (dynamic divs for video/images) --- */
 .media-block {
   position: relative;
