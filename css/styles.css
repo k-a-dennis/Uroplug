@@ -1438,9 +1438,7 @@ p1 {
   .product-bg-video {
     transform: scale(1.1);
   }
-}
 
-@media (max-width: 768px) {
   .nav__links { display: none; }
   .nav__cta--desktop { display: none; }
   .nav__toggle { display: flex; }
@@ -1464,6 +1462,21 @@ p1 {
   }
 
   .floating-image { display: none; }
+
+  .hero__content--split {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero__bleed-image {
+    display: none;        /* hide the bleed image entirely on mobile */
+    margin-bottom: 0;     /* cancel the bleed just in case */
+  }
+
+  /* Also reset the Overview section's extra top padding on mobile */
+  .section--white:has(.section__header) {
+    padding-top: var(--space-3xl);
+  }
 }
 
 @media (max-width: 480px) {
