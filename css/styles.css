@@ -1426,6 +1426,20 @@ p1 {
 }
 
 /* --- RESPONSIVE --- */
+
+/* Fix .split section layouts when resizing */
+@media (min-width: 1025px) {
+  .split--reverse .split__content { order: 2; }
+  .split--reverse .split__media { order: 1; }
+}
+
+/* Adjust scale of graphic within .split--market to fit the layout */
+@media (min-width: 1025px) {
+  .split.split--market {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .split { grid-template-columns: 1fr; gap: var(--space-lg); }
