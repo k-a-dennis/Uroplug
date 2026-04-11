@@ -56,23 +56,15 @@
   </nav>
 
   <!-- ========== HERO ========== -->
-  <section class="hero hero--align-bottom hero--justify-left">
-    <!-- Background video / image container -->
-    <div class="hero__bg">
-      <!-- Background UP device video -->
-      <div class="media-block media-block--hero" style="width:100%;height:100%;">
-        <img src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1773023665/pexels-juanpphotoandvideo-951290_ssxzad.jpg">
-      </div>
-    </div>
-    <div class="hero__overlay hero__overlay--gradient"></div>
+  <section class="hero hero--split">
 
-    <!-- Decorative gradient orbs -->
-    <div class="gradient-orb gradient-orb--primary" style="width:500px;height:500px;top:-100px;right:-150px;"></div>
-    <div class="gradient-orb gradient-orb--accent" style="width:300px;height:300px;bottom:10%;left:5%;opacity:0.1;"></div>
+    <!-- LEFT PANEL: text content -->
+    <div class="hero__panel hero__panel--content">
+      <!-- Subtle decorative orb behind text -->
+      <div class="gradient-orb gradient-orb--primary" style="width:600px;height:600px;top:-100px;left:-200px;opacity:0.12;"></div>
 
-    <div class="hero__content container">
-      <div style="max-width: 680px;">
-        <div class="hero__badge reveal">
+      <div class="hero__panel-inner">
+        <div class="hero__badge hero__badge--dark reveal">
           <span class="dot"></span>
           Now raising pre-seed
         </div>
@@ -80,8 +72,7 @@
           Revolutionizing <em>incontinence</em> therapy
         </h1>
         <p class="hero__subtitle reveal reveal--delay-2">
-          <b>Urologic Design is developing Uroplug, a disposable intraurinary <br>device designed to provide lasting incontinence relief —</br>
-          safely, painlessly, at home.</b>
+          Urologic Design is developing Uroplug — a disposable intraurinary device designed to provide lasting incontinence relief, safely, painlessly, at home.
         </p>
         <div class="hero__actions reveal reveal--delay-3">
           <a href="technology.html" class="btn btn--primary btn--lg">Explore Our Technology</a>
@@ -89,6 +80,17 @@
         </div>
       </div>
     </div>
+
+    <!-- RIGHT PANEL: full-bleed photograph -->
+    <div class="hero__panel hero__panel--image">
+      <img
+        src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1773023665/pexels-juanpphotoandvideo-951290_ssxzad.jpg"
+        alt="Patient living confidently"
+      >
+      <!-- Subtle left-edge fade to blend panels -->
+      <div class="hero__panel-fade"></div>
+    </div>
+
   </section>
 
   <!-- ========== PRODUCT VID ========== -->
@@ -260,7 +262,7 @@
           <ul class="footer__links">
             <li><a href="investors.html">Overview</a></li>
             <li><a href="investors.html#faq">FAQ</a></li>
-            <li><a href="mailto:investors@uroplug.com">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#bfd6d1c9dacccbd0cdccffcacdd0cfd3cad891dcd0d2">Contact</a></li>
           </ul>
         </div>
         <div class="footer__col">
@@ -278,7 +280,3 @@
           <span>Placeholder — not for commercial distribution</span>
         </div>
       </div>
-    </div>
-  </footer>
-</body>
-</html>
