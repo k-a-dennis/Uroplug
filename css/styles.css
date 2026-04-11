@@ -164,6 +164,12 @@ p1 {
   max-width: 68ch;
 }
 
+p2 {
+  font-size: 1.18rem;
+  color: var(--color-dark-gray);
+  max-width: 88ch;
+}
+
 .text-sm { font-size: 0.9rem; }
 .text-lg { font-size: 1.2rem; }
 .text-xl { font-size: 1.4rem; line-height: 1.5; }
@@ -707,7 +713,7 @@ p1 {
 
 /* Give the Overview section room for the bleed */
 .section--white:has(.section__header) {
-  padding-top: calc(var(--space-3xl) + 7%);
+  padding-top: calc(var(--space-3xl));
 }
 
 /* --- MEDIA CONTAINERS (dynamic divs for video/images) --- */
