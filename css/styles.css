@@ -697,7 +697,7 @@ p2 {
   z-index: 10;
 
   /* The bleed: image is 100% tall, but pushed down so ~20% hangs below */
-  margin-bottom: -28%;     /* pulls it down into the next section */
+  margin-bottom: -20%;     /* pulls it down into the next section */
   align-self: flex-end;
 }
 
