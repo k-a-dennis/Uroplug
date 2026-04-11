@@ -44,6 +44,7 @@
   --space-xl: 4rem;
   --space-2xl: 6rem;
   --space-3xl: 8rem;
+  --space-4xl: 10rem;
 
   /* Layout */
   --max-width: 1280px;
@@ -675,8 +676,7 @@ p2 {
   flex-wrap: wrap;
 }
 
-/* --- HERO BLEED IMAGE (Development page) --- */
-
+/* --- HERO BLEED IMAGE --- */
 /* The section wrapper needs overflow visible so the image can escape */
 .hero-bleed-wrap {
   overflow: visible;
@@ -1125,6 +1125,13 @@ p2 {
   font-family: var(--font-body);
   min-width: 700px;
 }
+
+/* --- DEVELOPMENT ROADMAP - TBD --- */
+
+
+
+
+
 
 /* Product image + name header cells */
 .comp-table thead tr.comp-table__img-row th {
