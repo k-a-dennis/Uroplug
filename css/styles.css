@@ -1516,7 +1516,6 @@ p2 {
   color: rgba(255, 255, 255, 0.65);
   margin-top: auto;
   padding-top: var(--space-xs);
-  transition: color var(--transition-fast), gap var(--transition-fast);
   text-decoration: none;
 }
 

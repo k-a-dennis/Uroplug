@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initScrollReveal();
+  initHeroSummary();
   initAccordions();
   initCountUp();
   highlightActiveNav();
@@ -83,6 +84,19 @@ function initScrollReveal() {
   });
 
   reveals.forEach(el => observer.observe(el));
+}
+
+/* --- HERO SUMMARY REVEAL --- */
+/* Targets the inner content elements (label, text, link) inside each segment.
+   The segment backgrounds are always visible; only the content fades in. */
+function initHeroSummary() {
+  const els = document.querySelectorAll('.hero-summary .reveal');
+  if (!els.length) return;
+
+  els.forEach(el => {
+    const existingDelay = parseFloat(getComputedStyle(el).transitionDelay) * 1000 || 0;
+    setTimeout(() => el.classList.add('reveal--visible'), 50 + existingDelay);
+  });
 }
 
 /* --- ACCORDION --- */
