@@ -527,7 +527,7 @@ p2 {
 .section--primary-muted { background: var(--color-primary-muted); }
 .section--secondary-scheme { background: var(--color-secondary-scheme); }
 .section--primary-gradient { background: linear-gradient(135deg, rgba(150, 233, 201, 0.85), rgba(26, 94, 62, 0.85))}
-.section--muted-gradient { background: linear-gradient(135deg, rgba(208, 237, 232, 0.85), rgba(181, 226, 219, 0.85))}
+.section--muted-gradient { background: linear-gradient(135deg, rgba(223, 238, 235, 0.85), rgba(186, 230, 223, 0.85))}
 
 .section--gradient {
   background: linear-gradient(170deg, var(--color-off-white) 0%, var(--color-primary-muted) 100%);
@@ -1437,6 +1437,96 @@ p2 {
 
 .gradient-orb--accent {
   background: var(--color-accent);
+}
+
+/* --- HERO SPLIT-PANEL (half-width content / half-width image) --- */
+
+/*
+ * .hero--split overrides the base .hero flex layout.
+ * The base .hero sets min-height:100vh, position:relative, overflow:hidden, padding-top:nav-height.
+ * Here we replace the single-axis flex with a two-column side-by-side split,
+ * each column stretching to fill the full viewport height.
+ */
+.hero--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* equal halves; adjust ratio here e.g. 55fr 45fr */
+  align-items: stretch;
+  padding-top: 0;                    /* nav sits over the top of both panels */
+  overflow: hidden;
+}
+
+/* ---- Left: content panel ---- */
+.hero__panel--content {
+  position: relative;
+  background: linear-gradient(160deg, var(--color-secondary-dark) 0%, var(--color-primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Inner wrapper: respects nav height at top, generous padding elsewhere */
+.hero__panel-inner {
+  position: relative;
+  z-index: 2;
+  padding: calc(var(--nav-height) + var(--space-2xl)) var(--space-2xl) var(--space-2xl) var(--space-2xl);
+  max-width: 640px;
+}
+
+/* Override h1 em color so it reads well on the dark panel */
+.hero__panel--content h1 em {
+  color: var(--color-primary-light);
+}
+
+/* ---- Right: photo panel ---- */
+.hero__panel--image {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__panel--image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Left-edge fade: blends the photo panel into the content panel */
+.hero__panel-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(6, 77, 66, 0.55) 0%,       /* matches --color-primary-dark */
+    rgba(6, 77, 66, 0.15) 25%,
+    transparent 55%
+  );
+  z-index: 1;
+}
+
+/* Responsive: stack vertically on tablet / mobile */
+@media (max-width: 900px) {
+  .hero--split {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 45vh;
+  }
+
+  .hero__panel-inner {
+    padding: calc(var(--nav-height) + var(--space-xl)) var(--space-md) var(--space-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero--split {
+    grid-template-rows: auto 35vh;
+  }
+
+  .hero__panel--image img {
+    object-position: center 20%;
+  }
 }
 
 /* --- HERO POSITION MODIFIERS --- */
