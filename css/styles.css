@@ -555,7 +555,7 @@ p2 {
 
 /* --- HERO SECTIONS --- */
 .hero {
-  min-height: 75vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -1439,6 +1439,24 @@ p2 {
   background: var(--color-accent);
 }
 
+/* --- HERO VIEWPORT WRAPPER --- */
+/*
+ * Owns the 100vh budget. The hero grows to fill whatever's left after the
+ * summary bar takes its natural height. No need to guess percentages.
+ */
+.hero-viewport {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* Guard against very short screens / tall summary bars on mobile */
+  min-height: 480px;
+}
+
+.hero-viewport .hero--split {
+  flex: 1;          /* grows to fill remaining height */
+  min-height: 0;    /* allows flex child to shrink below its content size if needed */
+}
+
 /* --- HERO SUMMARY BAR --- */
 /*
  * Full-width 3-column anchor bar that sits immediately below the hero.
@@ -1565,10 +1583,11 @@ p2 {
  */
 .hero--split {
   display: grid;
-  grid-template-columns: 1fr 1fr;   /* equal halves; adjust ratio here e.g. 55fr 45fr */
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
-  padding-top: 0;                    /* nav sits over the top of both panels */
+  padding-top: 0;
   overflow: hidden;
+  min-height: 0;    /* let .hero-viewport flex control the height */
 }
 
 /* ---- Left: content panel ---- */
