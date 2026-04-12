@@ -555,7 +555,7 @@ p2 {
 
 /* --- HERO SECTIONS --- */
 .hero {
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -1439,6 +1439,122 @@ p2 {
   background: var(--color-accent);
 }
 
+/* --- HERO SUMMARY BAR --- */
+/*
+ * Full-width 3-column anchor bar that sits immediately below the hero.
+ * Acts as a visual bridge — pulls the eye down and surfaces key entry points.
+ * No overlap/z-index tricks: it's a normal next-sibling element so it works
+ * cleanly regardless of hero height.
+ */
+.hero-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+  z-index: 10;
+}
+
+.hero-summary__segment {
+  padding: var(--space-xl) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+  transition: filter var(--transition-medium);
+}
+
+/* Vertical dividers between segments */
+.hero-summary__segment + .hero-summary__segment::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Segment color variants */
+.hero-summary__segment--dark {
+  background: var(--color-secondary-dark);
+}
+
+.hero-summary__segment--accent {
+  background: var(--color-primary-dark);
+}
+
+.hero-summary__segment--light {
+  background: var(--color-primary);
+}
+
+/* Label: small mono uppercase */
+.hero-summary__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Body text */
+.hero-summary__text {
+  font-size: 0.97rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 36ch;
+  margin: 0;
+}
+
+/* CTA link */
+.hero-summary__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  transition: color var(--transition-fast), gap var(--transition-fast);
+  text-decoration: none;
+}
+
+.hero-summary__link .arrow {
+  transition: transform var(--transition-fast);
+}
+
+.hero-summary__link:hover {
+  color: var(--color-white);
+}
+
+.hero-summary__link:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Hover lifts the whole segment slightly */
+.hero-summary__segment:hover {
+  filter: brightness(1.07);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-summary__segment + .hero-summary__segment::before {
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+  }
+
+  .hero-summary__segment {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
 /* --- HERO SPLIT-PANEL (half-width content / half-width image) --- */
 
 /*
@@ -1472,6 +1588,10 @@ p2 {
   z-index: 2;
   padding: calc(var(--nav-height) + var(--space-2xl)) var(--space-2xl) var(--space-2xl) var(--space-2xl);
   max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
 /* Override h1 em color so it reads well on the dark panel */
