@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 em {
-  color:#064D42;
+  color:#1a8070;
 }
 
 h1 {
@@ -1440,16 +1440,12 @@ p2 {
 }
 
 /* --- HERO VIEWPORT WRAPPER --- */
-/*
- * Owns the 100vh budget. The hero grows to fill whatever's left after the
- * summary bar takes its natural height. No need to guess percentages.
- */
+/* Full 100vh. The hero grows to fill whatever's left after the summary bar takes its natural height. No guessing percentages. */
 .hero-viewport {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  /* Guard against very short screens / tall summary bars on mobile */
-  min-height: 480px;
+  min-height: 480px;   /* Guard against very short screens / tall summary bars on mobile */
 }
 
 .hero-viewport .hero--split {
@@ -1458,17 +1454,19 @@ p2 {
 }
 
 /* --- HERO SUMMARY BAR --- */
-/*
- * Full-width 3-column anchor bar that sits immediately below the hero.
- * Acts as a visual bridge — pulls the eye down and surfaces key entry points.
- * No overlap/z-index tricks: it's a normal next-sibling element so it works
- * cleanly regardless of hero height.
- */
-.hero-summary {
+
+.hero-summary { /* Full-width 3-column anchor bar that sits immediately below the hero. No overlap/z-index tricks:  normal next-sibling element. */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 0;
   position: relative;
   z-index: 10;
+  background: linear-gradient(
+    to right,
+    var(--color-secondary-dark) 0%,
+    var(--color-primary-dark) 50%,
+    var(--color-primary) 100%
+  );
 }
 
 .hero-summary__segment {
@@ -1478,30 +1476,14 @@ p2 {
   gap: var(--space-sm);
   position: relative;
   transition: filter var(--transition-medium);
+  background: transparent;
 }
 
-/* Vertical dividers between segments */
-.hero-summary__segment + .hero-summary__segment::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 20%;
-  height: 60%;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* Segment color variants */
-.hero-summary__segment--dark {
-  background: var(--color-secondary-dark);
-}
-
-.hero-summary__segment--accent {
-  background: var(--color-primary-dark);
-}
-
+/* Segment color variants — removed; gradient on parent handles color */
+.hero-summary__segment--dark,
+.hero-summary__segment--accent,
 .hero-summary__segment--light {
-  background: var(--color-primary);
+  background: transparent;
 }
 
 /* Label: small mono uppercase */
@@ -1575,14 +1557,8 @@ p2 {
 
 /* --- HERO SPLIT-PANEL (half-width content / half-width image) --- */
 
-/*
- * .hero--split overrides the base .hero flex layout.
- * The base .hero sets min-height:100vh, position:relative, overflow:hidden, padding-top:nav-height.
- * Here we replace the single-axis flex with a two-column side-by-side split,
- * each column stretching to fill the full viewport height.
- */
-.hero--split {
-  display: grid;
+.hero--split {                          
+  display: grid;                        /* .hero--split overrides the base .hero flex layout. */
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
   padding-top: 0;
@@ -1595,28 +1571,23 @@ p2 {
   position: relative;
   background: linear-gradient(160deg, var(--color-secondary-dark) 0%, var(--color-primary-dark) 100%);
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: center;        /* vertical: center in panel */
+  justify-content: center;    /* horizontal: center in panel — change to flex-start/flex-end to shift left/right */
   overflow: hidden;
   z-index: 1;
+  padding: 0 var(--space-sm);  /* breathing room from panel edges */
 }
 
-/* Inner wrapper: respects nav height at top, generous padding elsewhere */
+/* Inner wrapper — no longer flex:1 so it sizes to content, not panel width */
 .hero__panel-inner {
   position: relative;
   z-index: 2;
-  padding: calc(var(--nav-height) + var(--space-2xl)) var(--space-2xl) var(--space-2xl) var(--space-2xl);
-  max-width: 640px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
+  padding-top: calc(var(--nav-height) + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  width: 100%;
+  max-width: 480px;           /* tighten this to keep text compact and centered */
 }
 
-/* Override h1 em color so it reads well on the dark panel */
-.hero__panel--content h1 em {
-  color: var(--color-primary-light);
-}
 
 /* ---- Right: photo panel ---- */
 .hero__panel--image {
@@ -1648,23 +1619,48 @@ p2 {
 
 /* Responsive: stack vertically on tablet / mobile */
 @media (max-width: 900px) {
+  .hero-viewport {   /* Let the viewport grow taller than 100vh on mobile —  stacked layout needsroom and forcing 100vh crushes the title */
+    height: auto;
+    min-height: 100vh;
+  }
+
   .hero--split {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 45vh;
+    /* Content panel: enough room for the title to breathe.
+       Image panel: decorative strip below. */
+    grid-template-rows: minmax(55vh, auto) 40vh;
   }
 
   .hero__panel-inner {
     padding: calc(var(--nav-height) + var(--space-xl)) var(--space-md) var(--space-xl);
   }
+
+  /* Summary bar gradient flips to vertical when stacked */
+  .hero-summary {
+    background: linear-gradient(
+      to bottom,
+      var(--color-secondary-dark) 0%,
+      var(--color-primary-dark) 50%,
+      var(--color-primary) 100%
+    );
+  }
+
+  .hero-summary__segment {
+    padding: var(--space-lg) var(--space-md);
+  }
 }
 
 @media (max-width: 768px) {
   .hero--split {
-    grid-template-rows: auto 35vh;
+    grid-template-rows: minmax(50vh, auto) 30vh;
   }
 
   .hero__panel--image img {
     object-position: center 20%;
+  }
+
+  .hero__panel-inner {
+    padding: calc(var(--nav-height) + var(--space-lg)) var(--space-md) var(--space-lg);
   }
 }
 
