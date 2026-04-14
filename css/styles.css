@@ -109,7 +109,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 em {
-  color:#1a8070;
+  color:#064D42;
+}
+
+em2 {
+  color:#0E8C78;
 }
 
 h1 {
@@ -1440,12 +1444,16 @@ p2 {
 }
 
 /* --- HERO VIEWPORT WRAPPER --- */
-/* Full 100vh. The hero grows to fill whatever's left after the summary bar takes its natural height. No guessing percentages. */
+/*
+ * Owns the 100vh budget. The hero grows to fill whatever's left after the
+ * summary bar takes its natural height. No need to guess percentages.
+ */
 .hero-viewport {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  min-height: 480px;   /* Guard against very short screens / tall summary bars on mobile */
+  height: 100dvh; /* dynamic viewport height — accounts for browser chrome on mobile */
+  min-height: 560px; /* raised floor so laptops with short screens don't crush the layout */
 }
 
 .hero-viewport .hero--split {
@@ -1454,8 +1462,13 @@ p2 {
 }
 
 /* --- HERO SUMMARY BAR --- */
-
-.hero-summary { /* Full-width 3-column anchor bar that sits immediately below the hero. No overlap/z-index tricks:  normal next-sibling element. */
+/*
+ * Full-width 3-column anchor bar that sits immediately below the hero.
+ * Acts as a visual bridge — pulls the eye down and surfaces key entry points.
+ * No overlap/z-index tricks: it's a normal next-sibling element so it works
+ * cleanly regardless of hero height.
+ */
+.hero-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
@@ -1470,7 +1483,7 @@ p2 {
 }
 
 .hero-summary__segment {
-  padding: var(--space-xl) var(--space-2xl);
+  padding: clamp(1.5rem, 3vh, 4rem) clamp(1.5rem, 3vw, 6rem);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -1511,11 +1524,13 @@ p2 {
   align-items: center;
   gap: 6px;
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1.10rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.65);
   margin-top: auto;
   padding-top: var(--space-xs);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out),
+              color var(--transition-fast), gap var(--transition-fast);
   text-decoration: none;
 }
 
@@ -1556,8 +1571,14 @@ p2 {
 
 /* --- HERO SPLIT-PANEL (half-width content / half-width image) --- */
 
-.hero--split {                          
-  display: grid;                        /* .hero--split overrides the base .hero flex layout. */
+/*
+ * .hero--split overrides the base .hero flex layout.
+ * The base .hero sets min-height:100vh, position:relative, overflow:hidden, padding-top:nav-height.
+ * Here we replace the single-axis flex with a two-column side-by-side split,
+ * each column stretching to fill the full viewport height.
+ */
+.hero--split {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
   padding-top: 0;
@@ -1574,19 +1595,24 @@ p2 {
   justify-content: center;    /* horizontal: center in panel — change to flex-start/flex-end to shift left/right */
   overflow: hidden;
   z-index: 1;
-  padding: 0 var(--space-sm);  /* breathing room from panel edges */
+  padding: 0 var(--space-2xl);  /* breathing room from panel edges */
 }
 
 /* Inner wrapper — no longer flex:1 so it sizes to content, not panel width */
 .hero__panel-inner {
   position: relative;
   z-index: 2;
-  padding-top: calc(var(--nav-height) + var(--space-xl));
-  padding-bottom: var(--space-xl);
+  /* clamp: compress on short laptop screens, expand on tall desktop monitors */
+  padding-top: calc(var(--nav-height) + clamp(1.5rem, 4vh, 4rem));
+  padding-bottom: clamp(1.5rem, 4vh, 4rem);
   width: 100%;
-  max-width: 480px;           /* tighten this to keep text compact and centered */
+  max-width: 480px;
 }
 
+/* Override h1 em color so it reads well on the dark panel */
+.hero__panel--content h1 em {
+  color: var(--color-primary-light);
+}
 
 /* ---- Right: photo panel ---- */
 .hero__panel--image {
@@ -1618,7 +1644,10 @@ p2 {
 
 /* Responsive: stack vertically on tablet / mobile */
 @media (max-width: 900px) {
-  .hero-viewport {   /* Let the viewport grow taller than 100vh on mobile —  stacked layout needsroom and forcing 100vh crushes the title */
+
+  /* Let the viewport grow taller than 100vh on mobile — the stacked
+     layout needs more room and forcing 100vh crushes the title */
+  .hero-viewport {
     height: auto;
     min-height: 100vh;
   }
