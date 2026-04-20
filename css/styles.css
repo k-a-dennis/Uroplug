@@ -370,7 +370,6 @@ p2 {
 
 /* Mobile nav overlay */
 .nav__mobile {
-  display: none;
   position: fixed;
   top: var(--nav-height);
   left: 0;
@@ -378,11 +377,38 @@ p2 {
   bottom: 0;
   background: rgba(247, 250, 249, 0.97);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 999;
   padding: var(--space-lg) var(--space-md);
+
+  /* Hidden state */
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.35s var(--ease-out), transform 0.4s var(--ease-out);
 }
 
-.nav__mobile--open { display: flex; flex-direction: column; }
+.nav__mobile--open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger nav links in */
+.nav__mobile-links li {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.35s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.nav__mobile--open .nav__mobile-links li:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+.nav__mobile--open .nav__mobile-links li:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.10s; }
+.nav__mobile--open .nav__mobile-links li:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.15s; }
+.nav__mobile--open .nav__mobile-links li:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.20s; }
+.nav__mobile--open .nav__mobile-links li:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.25s; }
+.nav__mobile--open .nav__mobile-links li:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.30s; }
 
 /* On mobile, nav bar is always solid white */
 @media (max-width: 768px) {
