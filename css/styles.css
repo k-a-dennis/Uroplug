@@ -1888,6 +1888,8 @@ p2 {
   margin-top: var(--space-xl, 3rem);
   font-family: 'Outfit', sans-serif;
   width: 100%;
+  transform: scale(1.1);
+  transform-origin: top center;
 }
 
 /* ─── DESKTOP: horizontal chevron layout ─── */
@@ -2054,7 +2056,7 @@ p2 {
 }
 
 /* Status variants */
-.rm-card--done   { background: #E1F5EE; color: #085041; border-color: #9FE1CB; }
+.rm-card--done   { background: #99eeb3; color: #085041; border-color: #61a16e; }
 .rm-card--active { background: #E0F4F5; color: #0E4A5C; border-color: #B0DCE5; }
 .rm-card--upcoming { background: #D9F2EE; color: #0A4A44; }
 .rm-card--future   { background: #EAF3F2; color: #2C5C58; border-style: dashed; border-color: #6BB5AB; opacity: .8; }

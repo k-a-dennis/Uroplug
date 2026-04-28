@@ -240,24 +240,25 @@ function initRoadmap() {
   ──────────────────────────────────────────────────────────────── */
 
   var STAGES = [
-    { id: 'pre',  label: 'Pre-seed', time: 'Complete',  done: false },
-    { id: 'seed', label: 'Seed',     time: 'Mo. 6 → 12',   done: false },
-    { id: 'a',    label: 'Series A', time: 'Mo. 12 → 18',  done: false },
-    { id: 'b',    label: 'Series B', time: 'Mo. 18 → 24+', done: false },
+    { id: 'pre',  label: 'Pre-seed', time: 'Complete',            done: false },
+    { id: 'seed', label: 'Seed',     time: 'Q3 2026 → Q1 2027',   done: false },
+    { id: 'a',    label: 'Series A', time: 'Mo. 12 → 18',         done: false },
+    { id: 'b',    label: 'Series B', time: 'Mo. 18 → 24+',        done: false },
   ];
 
   // position: 'above' | 'below'
   // status:   'done' | 'active' | 'upcoming' | 'future'
   var MILESTONES = [
-    { stage: 'pre',  position: 'above', label: 'Regulatory',  title: 'FDA / IRB engagement',     sub: 'Pre-submission meeting secured',           status: 'done'     },
+    { stage: 'pre',  position: 'above', label: 'Operations',  title: '1st manufacturing run',    sub: 'Final materials + assembly',               status: 'done'     },
     { stage: 'pre',  position: 'above', label: 'Operations',  title: 'CRO partnership',          sub: 'Yale Medicine onboarded',                  status: 'done'     },
-    { stage: 'pre',  position: 'below', label: 'IP',          title: 'Patents issued',           sub: '2 awarded, 3 pending',                     status: 'done'     },
-    { stage: 'pre',  position: 'below', label: 'Operations',  title: '1st manufacturing run',    sub: 'Final materials + assembly',               status: 'done'     },
+    { stage: 'pre',  position: 'below', label: 'Regulatory',  title: 'FDA / IRB engagement',     sub: 'Pre-submission meeting secured',           status: 'done'     },
+    { stage: 'pre',  position: 'below', label: 'IP',          title: 'Patents issued',           sub: '3 awarded, 2 pending',                     status: 'done'     },
 
     { stage: 'seed', position: 'above', label: 'Regulatory',  title: 'Biocompatibility + IDE',   sub: 'Secure investigational device exemption',  status: 'active'   },
-    { stage: 'seed', position: 'above', label: 'Clinical',    title: 'Early feasibility study',  sub: 'Conducted through Yale Med',               status: 'active'   },
+    { stage: 'seed', position: 'above', label: 'Regulatory',  title: 'FDA engagement',           sub: 'Supplements & Q-subs',                     status: 'active'   },
+    { stage: 'seed', position: 'below', label: 'Clinical',    title: 'Early feasibility study',  sub: 'Conducted through Yale Med',               status: 'active'   },
     { stage: 'seed', position: 'below', label: 'Operations',  title: '2nd manufacturing run',    sub: 'For feasibility study',                    status: 'active'   },
-    { stage: 'seed', position: 'below', label: 'Regulatory',  title: 'FDA engagement',           sub: 'Supplements & Q-subs',                     status: 'active'   },
+
 
     { stage: 'a',    position: 'above', label: 'Clinical',    title: 'Feasibility study',        sub: 'At Yale Med',                              status: 'upcoming' },
     { stage: 'a',    position: 'above', label: 'Regulatory',  title: 'FDA submission prep',      sub: 'Anticipated Class II pathway',             status: 'upcoming' },
@@ -273,7 +274,7 @@ function initRoadmap() {
   var COLORS = ['#0E4A5C', '#0A6E72', '#0D8C84', '#12A896'];
 
   var LEGEND = [
-    { color: '#9FE1CB', border: false,  label: 'Completed'          },
+    { color: '#99eeb3', border: false,  label: 'Completed'          },
     { color: '#B0DCE5', border: false,  label: 'In progress'        },
     { color: '#7FC5BB', border: false,  label: 'Upcoming'           },
     { color: '#B8D8D5', border: true,   label: 'Future / horizon'   },
