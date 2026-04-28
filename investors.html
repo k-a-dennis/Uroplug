@@ -266,16 +266,8 @@
           </p>
           <div style="margin-top: var(--space-md);">
             <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--color-light-gray);">
-              <span style="font-weight: 500;">Clinical Development</span>
-              <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-primary);">15%</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--color-light-gray);">
               <span style="font-weight: 500;">Engineering &amp; Product Development</span>
               <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-primary);">40%</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--color-light-gray);">
-              <span style="font-weight: 500;">IP Expansion</span>
-              <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-primary);">4%</span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--color-light-gray);">
               <span style="font-weight: 500;">Regulatory &amp; Quality</span>
@@ -285,16 +277,33 @@
               <span style="font-weight: 500;">Operations &amp; G&amp;A</span>
               <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-primary);">19%</span>
             </div>
+            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--color-light-gray);">
+              <span style="font-weight: 500;">Clinical Development</span>
+              <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-primary);">15%</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--color-light-gray);">
+              <span style="font-weight: 500;">IP Expansion</span>
+              <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-primary);">4%</span>
+            </div>
           </div>
         </div>
         <div class="split__media reveal reveal--delay-2">
-          <div class="media-block media-block--aspect-1-1" style="max-width: 400px; margin: 0 auto;">
-            <img src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1774326249/Pie_Chart_abznz3.png">
-              <div class="media-block__placeholder-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>
-              </div>
-              <span>Use of Funds Pie Chart</span>
+          <div style="max-width: 400px; margin: 0 auto;">
+
+            <!-- legend -->
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px;font-size:12px;color:var(--color-medium-gray);font-family:'Outfit',sans-serif;">
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#0A6E72;flex-shrink:0;"></span>Manufacturing — 40%</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#0D8C84;flex-shrink:0;"></span>Regulatory — 22%</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#12A896;flex-shrink:0;"></span>Operations — 19%</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#0E4A5C;flex-shrink:0;"></span>Study Ops — 15%</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#1DC5A8;flex-shrink:0;"></span>Legal — 4%</span>
             </div>
+
+            <!-- chart canvas -->
+            <div style="position:relative;width:100%;height:360px;">
+              <canvas id="fundsChart" role="img" aria-label="Pie chart: use of pre-seed funds by category"></canvas>
+            </div>
+
           </div>
         </div>
       </div>
@@ -510,5 +519,6 @@
       </div>
     </div>
   </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </body>
 </html>
