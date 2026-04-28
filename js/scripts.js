@@ -234,13 +234,13 @@ function initRoadmap() {
   if (!root) return;   // ← safety guard: exits silently on pages without the roadmap div
 
   /* ── DATA ─────────────────────────────────────────────────────
-    STAGES and MILESTONES edits here to update the roadmap.
+     STAGES and MILESTONES edits here to update the roadmap.
      Add a new stage by pushing to STAGES and adding a color to COLORS.
      Add a milestone by pushing to MILESTONES with the matching stage id.
   ──────────────────────────────────────────────────────────────── */
 
   var STAGES = [
-    { id: 'pre',  label: 'Pre-seed', time: 'Now → Mo. 6',  done: false  },
+    { id: 'pre',  label: 'Pre-seed', time: 'Complete',  done: false },
     { id: 'seed', label: 'Seed',     time: 'Mo. 6 → 12',   done: false },
     { id: 'a',    label: 'Series A', time: 'Mo. 12 → 18',  done: false },
     { id: 'b',    label: 'Series B', time: 'Mo. 18 → 24+', done: false },
@@ -260,7 +260,7 @@ function initRoadmap() {
     { stage: 'seed', position: 'below', label: 'Regulatory',  title: 'FDA engagement',           sub: 'Supplements & Q-subs',                     status: 'active'   },
 
     { stage: 'a',    position: 'above', label: 'Clinical',    title: 'Feasibility study',        sub: 'At Yale Med',                              status: 'upcoming' },
-    { stage: 'a',    position: 'above', label: 'Regulatory',  title: 'FDA submission prep',      sub: 'Anticipated Class II pathway',              status: 'upcoming' },
+    { stage: 'a',    position: 'above', label: 'Regulatory',  title: 'FDA submission prep',      sub: 'Anticipated Class II pathway',             status: 'upcoming' },
     { stage: 'a',    position: 'below', label: 'Operations',  title: '3rd manufacturing run',    sub: 'For pivotal study',                        status: 'upcoming' },
     { stage: 'a',    position: 'below', label: 'IP',          title: 'Continuation filings',     sub: 'International expansion',                  status: 'upcoming' },
 
