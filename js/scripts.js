@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   highlightActiveNav();
   initScrollVideo();
   initRoadmap();
+  initFundsChart();
 });
 
 /* --- NAVIGATION --- */
@@ -366,3 +367,69 @@ function initRoadmap() {
   root.appendChild(legend);
 }
 
+// Investors Page UoF Pie Chart //
+function initFundsChart() {
+  var canvas = document.getElementById('fundsChart');
+  if (!canvas) return;
+
+  var isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+
+  new Chart(canvas, {
+    type: 'pie',
+    data: {
+      labels: ['Manufacturing', 'Regulatory', 'Operations', 'Study Ops', 'Legal'],
+      datasets: [{
+        data: [40, 22, 19, 15, 4],
+        backgroundColor: ['#0A6E72', '#0D8C84', '#12A896', '#0E4A5C', '#1DC5A8'],
+        borderColor: isDark ? '#1a1a1a' : '#ffffff',
+        borderWidth: 3,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function (ctx) {
+              return '  ' + ctx.label + ': ' + ctx.parsed + '%';
+            }
+          }
+        }
+      },
+      animation: { animateRotate: true, duration: 900 }
+    },
+    plugins: [{
+      id: 'sliceLabels',
+      afterDatasetDraw: function (chart) {
+        var ctx  = chart.ctx;
+        var data = chart.data;
+        var meta = chart.getDatasetMeta(0);
+        meta.data.forEach(function (arc, i) {
+          var pct   = data.datasets[0].data[i];
+          var label = data.labels[i];
+          if (pct < 5) return;
+          var cx   = chart.getDatasetMeta(0).data[i].x;
+          var cy   = chart.getDatasetMeta(0).data[i].y;
+          var pos  = arc.tooltipPosition();
+          var pos  = {
+            x: cx + (arc.tooltipPosition().x - cx) * 1.2,
+            y: cy + (arc.tooltipPosition().y - cy) * 1.2
+          };
+          ctx.save();
+          ctx.font         = '600 16px Outfit, sans-serif';
+          ctx.fillStyle    = '#ffffff';
+          ctx.textAlign    = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(label, pos.x, pos.y - 7);
+          ctx.font      = '500 15px Outfit, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          ctx.fillText(pct + '%', pos.x, pos.y + 8);
+          ctx.restore();
+        });
+      }
+    }]
+  });
+}
