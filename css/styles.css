@@ -45,6 +45,8 @@
   --space-2xl: 6rem;
   --space-3xl: 8rem;
   --space-4xl: 10rem;
+  --space-5xl: 12rem;
+  --space-6xl: 14rem;
 
   /* Layout */
   --max-width: 1280px;
@@ -1888,6 +1890,8 @@ p2 {
   margin-top: var(--space-xl, 3rem);
   font-family: 'Outfit', sans-serif;
   width: 100%;
+  transform: scale(1.15);
+  transform-origin: top center;
 }
 
 /* ─── DESKTOP: horizontal chevron layout ─── */
@@ -1946,7 +1950,7 @@ p2 {
     var(--notch) 100%,
     calc(var(--notch) * 2) 50%
   );
-  --notch: 18px;
+  --notch: 10px;
 }
 .rm-col:first-child .rm-chevron__bg {
   clip-path: polygon(
@@ -1956,7 +1960,7 @@ p2 {
     calc(100% - var(--notch)) 100%,
     0 100%
   );
-  --notch: 18px;
+  --notch: 10px;
 }
 .rm-col:last-child .rm-chevron__bg {
   clip-path: polygon(
@@ -1966,7 +1970,7 @@ p2 {
     var(--notch) 100%,
     calc(var(--notch) * 2) 50%
   );
-  --notch: 18px;
+  --notch: 10px;
 }
 
 .rm-chevron__inner {
@@ -2054,7 +2058,7 @@ p2 {
 }
 
 /* Status variants */
-.rm-card--done   { background: #E1F5EE; color: #085041; border-color: #9FE1CB; }
+.rm-card--done   { background: #99eeb3; color: #085041; border-color: #61a16e; }
 .rm-card--active { background: #E0F4F5; color: #0E4A5C; border-color: #B0DCE5; }
 .rm-card--upcoming { background: #D9F2EE; color: #0A4A44; }
 .rm-card--future   { background: #EAF3F2; color: #2C5C58; border-style: dashed; border-color: #6BB5AB; opacity: .8; }
