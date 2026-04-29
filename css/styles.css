@@ -1670,6 +1670,19 @@ p2 {
   z-index: 1;
 }
 
+/* Top-edge fade: blends the photo panel into the content panel */
+.hero__panel-topfade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 77, 66, 0.55) 0%,       /* matches --color-primary-dark */
+    rgba(6, 77, 66, 0.15) 25%,
+    transparent 55%
+  );
+  z-index: 2;
+}
+
 /* Responsive: stack vertically on tablet / mobile */
 @media (max-width: 900px) {
 
