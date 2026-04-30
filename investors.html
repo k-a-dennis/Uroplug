@@ -86,7 +86,7 @@
   </section>
 
   <!-- INVESTMENT THESIS -->
-  <section id="thesis" class="section section--off-white">
+  <section id="thesis" class="section section--grayish">
     <div class="container">
       <div class="section__header text-center reveal">
         <span class="label">Investment Thesis</span>
@@ -94,7 +94,7 @@
       </div>
 
       <div class="grid grid-2 stagger-children" style="max-width: 1000px; margin: 0 auto;">
-        <div class="card" style="border-left: 4px solid var(--color-primary);">
+        <div class="card" style="border-left: 4px solid var(--color-primary-light);">
           <h3>Massive Unmet Need</h3>
           <p>Over 400 million patients worldwide suffer from urinary incontinence with limited therapeutic options. Current standard of care is inadequate, archaic, or invasive, creating signficant incentive for a novel solution.</p>
         </div>
@@ -102,11 +102,11 @@
           <h3>Ineffective Current Treatments</h3>
           <p>Limited existing options offer expensive, obtrusive, painful, risky, and inefficient treatments for urinary incontinence. Uroplug was designed by a team of industry-leading experts to change that.</p>
         </div>
-        <div class="card" style="border-left: 4px solid var(--color-accent);">
+        <div class="card" style="border-left: 4px solid var(--color-primary-light);">
           <h3>Clear Regulatory Path</h3>
           <p>We have a defined FDA pathway informed by pre-submission guidance, a rigorous clinical plan, and experienced medical experts, entrepreneurial innovators, and regulatory leadership on the team.</p>
         </div>
-        <div class="card" style="border-left: 4px solid var(--color-secondary);">
+        <div class="card" style="border-left: 4px solid var(--color-primary-light);">
           <h3>Capital-Efficient Model</h3>
           <p>As a patient end-user device, Uroplug can reach market through a DTC and specialty physician channel strategy, eliminating the massive overhead and market quagmire of traditional medtech at a fraction of the cost.</p>
         </div>
@@ -115,43 +115,47 @@
   </section>
 
   <!-- MARKET OPPORTUNITY -->
-    <section class="section section--dark-gradient">
-      <div class="container">
-        <div class="split split--reverse split--market">
-          <div class="split__media reveal">
-            <div class="media-block media-block--aspect-16-9">
-              <img src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1774325183/market_chart_padded_mlqp2u.png">
-            </div>
+  <section class="section section--dark-gradient" style="padding: 0; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; min-height: 560px;">
+
+      <!-- Image — bleeds full height, no border-radius -->
+      <div class="reveal" style="position: relative; overflow: hidden; min-height: 480px;">
+        <img
+          src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1774325183/market_chart_padded_mlqp2u.png"
+          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"
+        >
+      </div>
+
+      <!-- Text content — padded, vertically centered -->
+      <div class="reveal reveal--delay-2" style="display: flex; flex-direction: column; justify-content: center; padding: var(--space-3xl) var(--space-xl);">
+        <span class="label">Market Opportunity</span>
+        <h2 style="margin-top: var(--space-sm);">Significant Market Potential</h2>
+        <p style="margin-top: var(--space-sm); color: rgba(255,255,255,0.65);">Millions of patients worldwide. Minimal viable alternatives.</p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-xl);">
+          <div class="stat-card" style="padding: 0;">
+            <div class="stat-card__number" style="color: var(--color-primary-light);">$12B</div>
+            <div class="stat-card__label" style="color: rgba(255,255,255,0.5);">Total Addressable Market</div>
           </div>
-          <div class="split__content reveal reveal--delay-2,">
-            <span class="label">Market</span>
-            <h2>Significant Market Potential</h2>
-            <p1>Millions of patients worldwide. Minimal viable alternatives.</p1>
-            <div class="grid grid-3 stagger-children" style="margin-top: var(--space-lg);">
-              <div class="stat-card">
-                <div class="stat-card__number" style="color: var(--color-primary-light);">$12B</div>
-                <div class="stat-card__label" style="color: rgba(255,255,255,0.5);">Total Addressable Market</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-card__number" style="color: var(--color-primary-light);">25M</div>
-                <div class="stat-card__label" style="color: rgba(255,255,255,0.5);">US Patients with Target Condition</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-card__number" style="color: var(--color-primary-light);">7%</div>
-                <div class="stat-card__label" style="color: rgba(255,255,255,0.5);">CAGR Next Decade (Estimated)</div>
-              </div>
-            </div>
+          <div class="stat-card" style="padding: 0;">
+            <div class="stat-card__number" style="color: var(--color-primary-light);">25M</div>
+            <div class="stat-card__label" style="color: rgba(255,255,255,0.5);">US Patients with Target Condition</div>
+          </div>
+          <div class="stat-card" style="padding: 0;">
+            <div class="stat-card__number" style="color: var(--color-primary-light);">7%</div>
+            <div class="stat-card__label" style="color: rgba(255,255,255,0.5);">CAGR Next Decade (Estimated)</div>
           </div>
         </div>
       </div>
-    </section>
+
+    </div>
+  </section>
 
   <!-- COMPETITOR ANALYSIS -->
- <section class="section section--off-white">
+ <section class="section section--grayish">
     <div class="container">
       <div class="section__header reveal">
         <span class="label">Competitor Analysis</span>
-        <h2>Precedent &amp; Limitations</h2>
+        <h2>Precedent with Limitations</h2>
         <p2>Proxy products currently available in the market show significant deficiencies in efficacy, safety, ease of use, and patient experience.</p2>
       </div>
 
