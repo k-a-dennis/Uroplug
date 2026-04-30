@@ -2177,3 +2177,55 @@ p2 {
   .rm-col__mobile,
   .rm-col__mobile-header { display: none; }
 }
+
+/* ============================================
+   LOGO INTRO OVERLAY
+   ============================================ */
+ 
+/* ── Overlay container ── */
+#logo-intro {
+  position: fixed;
+  inset: 0;                          /* covers the entire viewport */
+  z-index: 9999;                     /* sits above nav, hero, everything */
+  background: #EDEDED;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  /* Start fully opaque — page is solid white on first paint,
+     no flash of hero content before the video loads.
+     JS adds .logo-intro--visible to fade the video in over the white. */
+  opacity: 1;
+  pointer-events: all;
+}
+ 
+/* ── Video fade IN state (white stays, video fades in on top) ── */
+#logo-intro.logo-intro--visible #logo-intro__video {
+  opacity: 1;
+}
+ 
+/* ── Fade OUT state ── */
+#logo-intro.logo-intro--exit {
+  opacity: 0;
+  transition: opacity var(--intro-fade-out, 900ms) ease;
+  pointer-events: none;              /* let clicks through during fade-out */
+}
+ 
+/* ── The video itself ── */
+#logo-intro__video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;               /* keeps aspect ratio, no cropping */
+  display: block;
+ 
+  /* Video fades in over the white background */
+  opacity: 0;
+  transition: opacity var(--intro-fade-in, 600ms) ease;
+}
+ 
+/* ── Reduced-motion: skip the animation entirely ── */
+@media (prefers-reduced-motion: reduce) {
+  #logo-intro {
+    display: none !important;
+  }
+}
