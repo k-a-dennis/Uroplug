@@ -278,7 +278,7 @@ function initRoadmap() {
     { color: '#99eeb3', border: false,  label: 'Completed'          },
     { color: '#B0DCE5', border: false,  label: 'In progress'        },
     { color: '#7FC5BB', border: false,  label: 'Upcoming'           },
-    { color: '#B8D8D5', border: true,   label: 'Future / horizon'   },
+    { color: '#B8D8D5', border: true,   label: 'Future'             },
   ];
 
   /* ── HELPERS ── */
