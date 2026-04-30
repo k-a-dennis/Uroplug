@@ -116,6 +116,11 @@ em {
 
 em2 {
   color:#0E8C78;
+  font-style: italic;
+}
+
+em3 {
+  color:#0E8C78;
 }
 
 h1 {
@@ -166,7 +171,7 @@ p {
 }
 
 p1 {
-  font-size: 1.05rem;
+  font-size: 1.18rem;
   color: var(--color-off-white);
   max-width: 68ch;
 }
