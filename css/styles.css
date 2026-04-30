@@ -20,6 +20,7 @@
   /* Neutrals */
   --color-white: #FFFFFF;
   --color-off-white: #F7FAF9;
+  --color-grayish: #f6f5f6;
   --color-light-gray: #EEF2F1;
   --color-medium-gray: #B0BDB8;
   --color-dark-gray: #6B7D76;
@@ -560,6 +561,7 @@ p2 {
 /* Section background variants */
 .section--white { background: var(--color-white); }
 .section--off-white { background: var(--color-off-white); }
+.section--grayish { background: var(--color-grayish); }
 .section--light { background: var(--color-light-gray); }
 .section--primary-muted { background: var(--color-primary-muted); }
 .section--secondary-scheme { background: var(--color-secondary-scheme); }
@@ -1901,6 +1903,14 @@ p2 {
   .stat-card { padding: var(--space-md); }
 }
 
+@media (max-width: 768px) {
+  .section--market-opportunity > div {
+    grid-template-columns: 1fr !important;
+  }
+  .section--market-opportunity > div > div:first-child {
+    min-height: 280px;
+  }
+}
 
 /* DEVELOPMENT ROADMAP */
 
