@@ -257,8 +257,8 @@ function initRoadmap() {
 
     { stage: 'seed', position: 'above', label: 'Regulatory',               title: 'Biocompatibility + IDE',   sub: 'Secure Investigational Device Exemption',       status: 'active'   },
     { stage: 'seed', position: 'above', label: 'Regulatory',               title: 'FDA Engagement',           sub: 'Supplements & Q-subs',                          status: 'active'   },
-    { stage: 'seed', position: 'below', label: 'Clinical',                 title: 'Early Feasibility Study',  sub: 'Conducted Through Yale Med',                    status: 'active'   },
     { stage: 'seed', position: 'below', label: 'Operations',               title: '1st Manufacturing Run',    sub: 'For Feasibility Study',                         status: 'active'   },
+    { stage: 'seed', position: 'below', label: 'Clinical',                 title: 'Early Feasibility Study',  sub: 'Conducted Through Yale Med',                    status: 'active'   },
 
 
     { stage: 'a',    position: 'above', label: 'Clinical',                title: 'Feasibility Study',         sub: 'At Yale Med',                                   status: 'upcoming' },
