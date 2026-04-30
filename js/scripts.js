@@ -33,13 +33,14 @@ function initLogoIntro() {
   // Only run on the homepage
   if (!document.querySelector('.hero--split')) return;
  
-  // Skip if user has already seen the intro this session  if (sessionStorage.getItem('introSeen')) return; // <--placeholder
+  // Skip if user has already seen the intro this session  
+  if (sessionStorage.getItem('introSeen')) return;
  
   const overlay = document.createElement('div');
   overlay.id = 'logo-intro';
   overlay.innerHTML = `
     <video id="logo-intro__video" muted playsinline autoplay>
-      <source src="video/logo.mp4" type="video/mp4">
+      <source src="assets/video/logo.mp4" type="video/mp4">
     </video>
   `;
   document.body.appendChild(overlay);
