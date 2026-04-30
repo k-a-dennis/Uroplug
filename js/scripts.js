@@ -1,9 +1,10 @@
 /* ============================================
-   MEDVANCE — Site JavaScript
+   UROPLUG — Site JavaScript
    Navigation, Scroll Animations, Interactivity
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initLogoIntro();
   initNav();
   initScrollReveal();
   initHeroSummary();
@@ -14,6 +15,70 @@ document.addEventListener('DOMContentLoaded', () => {
   initRoadmap();
   initFundsChart();
 });
+
+/* ============================================
+   LOGO INTRO OVERLAY
+   ============================================ */
+ 
+// ── TIMING KNOBS (all values in milliseconds) ──────────────────────────────
+const INTRO_CONFIG = {
+  fadeInDelay:    200,   // pause before overlay fades in (after DOM ready)
+  fadeInDuration: 600,   // how long the white-to-visible fade takes
+  holdAfterEnd:   400,   // extra pause after video ends before fade-out begins
+  fadeOutDuration:900,   // how long the fade-out to hero takes
+};
+// ───────────────────────────────────────────────────────────────────────────
+ 
+function initLogoIntro() {
+  // Only run on the homepage
+  if (!document.querySelector('.hero--split')) return;
+ 
+  // Skip if user has already seen the intro this session  if (sessionStorage.getItem('introSeen')) return; // <--placeholder
+ 
+  const overlay = document.createElement('div');
+  overlay.id = 'logo-intro';
+  overlay.innerHTML = `
+    <video id="logo-intro__video" muted playsinline autoplay>
+      <source src="video/logo.mp4" type="video/mp4">
+    </video>
+  `;
+  document.body.appendChild(overlay);
+ 
+  // Lock scroll while intro is active
+  document.body.style.overflow = 'hidden';
+ 
+  // Apply CSS timing variables so CSS transitions stay in sync
+  overlay.style.setProperty('--intro-fade-in',  INTRO_CONFIG.fadeInDuration  + 'ms');
+  overlay.style.setProperty('--intro-fade-out', INTRO_CONFIG.fadeOutDuration + 'ms');
+ 
+  const video = overlay.querySelector('#logo-intro__video');
+ 
+  // ── Step 1: fade overlay IN after initial delay ──────────────────────────
+  setTimeout(() => {
+    overlay.classList.add('logo-intro--visible');
+  }, INTRO_CONFIG.fadeInDelay);
+ 
+  // ── Step 2: once video ends, hold briefly then fade OUT ──────────────────
+  function beginExit() {
+    setTimeout(() => {
+      overlay.classList.add('logo-intro--exit');
+ 
+      overlay.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'opacity') return;
+        overlay.removeEventListener('transitionend', onEnd);
+        overlay.remove();
+        document.body.style.overflow = '';
+        sessionStorage.setItem('introSeen', '1');
+      });
+    }, INTRO_CONFIG.holdAfterEnd);
+  }
+ 
+  video.addEventListener('ended', beginExit);
+ 
+  // Fallback: if video fails to play or stalls, exit after 6 s
+  const fallback = setTimeout(beginExit, 6000);
+  video.addEventListener('ended', () => clearTimeout(fallback));
+}
 
 /* --- NAVIGATION --- */
 function initNav() {
