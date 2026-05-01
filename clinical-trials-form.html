@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Trial Participation — Urologic Design</title>
+  <meta name="description" content="Express interest in participating in upcoming Uroplug clinical trials. Help us bring next-generation incontinence treatment to patients everywhere.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ─── PAGE-SPECIFIC STYLES ─────────────────────────────── */
+
+    .ct-hero {
+      padding-top: calc(var(--nav-height) + var(--space-2xl));
+      padding-bottom: var(--space-2xl);
+      background: linear-gradient(150deg, var(--color-secondary-dark) 0%, var(--color-primary-dark) 60%, #0a2a24 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ct-hero .noise-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .ct-hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    .ct-hero .label {
+      color: var(--color-secondary-scheme);
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+
+    .ct-hero h1 {
+      color: var(--color-white);
+      margin-bottom: var(--space-sm);
+      max-width: 700px;
+    }
+
+    .ct-hero h1 em { color: var(--color-secondary-scheme); font-style: italic; }
+
+    .ct-hero__sub {
+      font-size: 1.18rem;
+      color: var(--color-medium-gray);
+      max-width: 560px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: var(--space-md);
+    }
+
+    .breadcrumb a { color: rgba(255,255,255,0.55); transition: color var(--transition-fast); }
+    .breadcrumb a:hover { color: var(--color-white); }
+
+    /* ── PAGE BODY ──────────────────────────────────────────── */
+    .ct-body {
+      background: var(--color-grayish);
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .ct-layout {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .ct-layout { grid-template-columns: 1fr; }
+      .ct-sidebar { order: -1; }
+    }
+
+    /* ── FORM CARD ──────────────────────────────────────────── */
+    .form-card {
+      background: var(--color-white);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(10,107,92,0.07), 0 1px 4px rgba(10,107,92,0.04);
+    }
+
+    .form-section {
+      padding: var(--space-lg) var(--space-xl);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .form-section:last-child { border-bottom: none; }
+
+    .form-section-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-section-head .label { font-size: 0.82rem; letter-spacing: 0.1em; }
+
+    .form-section-head__line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-light-gray);
+    }
+
+    /* ── FIELD GRID ─────────────────────────────────────────── */
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm) var(--space-md);
+    }
+
+    .field-grid .full { grid-column: 1 / -1; }
+
+    @media (max-width: 560px) {
+      .field-grid { grid-template-columns: 1fr; }
+      .field-grid .full { grid-column: 1; }
+      .form-section { padding: var(--space-md); }
+    }
+
+    /* ── FORM ELEMENTS ──────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .field > label {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .field > label .req { color: var(--color-accent); margin-left: 2px; }
+
+    .field-hint {
+      font-size: 0.8rem;
+      color: var(--color-dark-gray);
+      font-family: var(--font-body);
+      line-height: 1.4;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      color: var(--color-secondary-dark);
+      background: var(--color-off-white);
+      border: 1.5px solid var(--color-light-gray);
+      border-radius: var(--border-radius);
+      padding: 0.65rem 0.9rem;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background: var(--color-white);
+      box-shadow: 0 0 0 3px var(--color-primary-muted);
+    }
+
+    input.field-error, select.field-error, textarea.field-error {
+      border-color: #c0392b;
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7D76' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    textarea { resize: vertical; min-height: 96px; }
+
+    /* ── RADIO / CHECKBOX ───────────────────────────────────── */
+    .radio-group, .check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .radio-group.inline, .check-group.inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.4rem;
+    }
+
+    .radio-item, .check-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.97rem;
+      color: var(--color-secondary-dark);
+      font-family: var(--font-body);
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    .radio-item input[type="radio"],
+    .check-item input[type="checkbox"] {
+      width: 17px; height: 17px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── CONSENT CALLOUT ────────────────────────────────────── */
+    .consent-callout {
+      background: var(--color-primary-muted);
+      border-radius: var(--border-radius);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .consent-callout strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .consent-callout p {
+      font-size: 0.92rem;
+      color: var(--color-primary-dark);
+      max-width: none;
+      line-height: 1.6;
+    }
+
+    .privacy-note {
+      background: #fef5f0;
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      padding: 0.85rem var(--space-md);
+      margin-bottom: var(--space-lg);
+      font-size: 0.87rem;
+      color: #7a3a1e;
+      line-height: 1.55;
+    }
+
+    .privacy-note a { color: var(--color-accent); font-weight: 600; }
+    .privacy-note a:hover { text-decoration: underline; }
+
+    .consent-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      margin-bottom: var(--space-sm);
+      font-size: 0.95rem;
+      color: var(--color-secondary-dark);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .consent-check input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--color-primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .consent-check .req { color: var(--color-accent); }
+
+    /* ── SUBMIT ─────────────────────────────────────────────── */
+    .submit-area { text-align: center; padding-top: var(--space-sm); }
+
+    .submit-disclaimer {
+      font-size: 0.8rem;
+      color: var(--color-dark-gray);
+      margin-top: var(--space-xs);
+      font-family: var(--font-body);
+      max-width: none;
+    }
+
+    /* ── SUCCESS ────────────────────────────────────────────── */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .success-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--color-primary-muted);
+      border: 2px solid var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+    }
+
+    .success-icon svg {
+      width: 28px; height: 28px;
+      stroke: var(--color-primary);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .success-panel h2 { color: var(--color-primary-dark); margin-bottom: var(--space-sm); }
+    .success-panel p { color: var(--color-dark-gray); max-width: 400px; margin: 0 auto; }
+
+    /* ── SIDEBAR ────────────────────────────────────────────── */
+    .ct-sidebar { display: flex; flex-direction: column; gap: var(--space-md); }
+
+    .info-card {
+      background: var(--color-white);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: 0 2px 16px rgba(10,107,92,0.06), 0 1px 3px rgba(10,107,92,0.04);
+    }
+
+    .info-card h4 {
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-sm);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--color-light-gray);
+      font-size: 1rem;
+    }
+
+    .info-card p, .info-card li {
+      font-size: 0.91rem;
+      color: var(--color-dark-gray);
+      line-height: 1.65;
+    }
+
+    .info-card p { max-width: none; }
+
+    .info-card ul {
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .info-card li { display: flex; align-items: flex-start; gap: 0.45rem; }
+
+    .info-card li::before {
+      content: '→';
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      line-height: 1.65;
+    }
+
+    .info-card a { color: var(--color-primary); font-weight: 500; }
+    .info-card a:hover { text-decoration: underline; }
+
+    .steps-list {
+      counter-reset: steps;
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.89rem;
+      color: var(--color-dark-gray);
+      line-height: 1.5;
+    }
+
+    .steps-list li::before {
+      content: counter(steps);
+      min-width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: var(--color-white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .contact-row:last-child { margin-bottom: 0; }
+
+    .contact-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: var(--color-primary-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .contact-icon svg {
+      width: 15px; height: 15px;
+      stroke: var(--color-primary);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-detail strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-detail span {
+      font-size: 0.85rem;
+      color: var(--color-dark-gray);
+    }
+
+    .info-card--accent {
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, #0a3d33 100%);
+    }
+
+    .info-card--accent h4 {
+      color: var(--color-white);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .info-card--accent li { color: rgba(255,255,255,0.75); }
+
+    .info-card--accent li::before { color: var(--color-secondary-scheme); }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-mark">
+          <img src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1769559521/UROLOGIC_DESIGN_LOGO_Hi-res_Transparent-BG_State-2_nfcqwc.png" alt="Uroplug Logo">
+        </div>
+        <div class="nav__logo">Urologic Design</div>
+      </a>
+      <ul class="nav__links">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="technology.html" class="nav__link">Technology</a></li>
+        <li><a href="development.html" class="nav__link">Development</a></li>
+        <li><a href="clinical-trials.html" class="nav__link nav__link--active">Clinical Trials</a></li>
+        <li><a href="team.html" class="nav__link">Team</a></li>
+        <li><a href="investors.html" class="nav__link">Investors</a></li>
+      </ul>
+      <a href="investors.html#contact" class="nav__cta nav__cta--desktop">Get in Touch</a>
+      <button class="nav__toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile">
+      <ul class="nav__mobile-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="technology.html">Technology</a></li>
+        <li><a href="development.html">Development</a></li>
+        <li><a href="clinical-trials.html">Clinical Trials</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="investors.html">Investors</a></li>
+      </ul>
+      <div style="margin-top: auto; padding-bottom: var(--space-lg);">
+        <a href="investors.html" class="btn btn--primary btn--lg" style="width: 100%; justify-content: center;">Get in Touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="ct-hero">
+    <div class="noise-overlay"></div>
+    <div class="ct-hero__inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span style="opacity:0.4;">›</span>
+        <a href="clinical-trials.html">Clinical Trials</a>
+        <span style="opacity:0.4;">›</span>
+        <span>Participation Form</span>
+      </div>
+      <span class="label">Research Participation</span>
+      <h1>Clinical Trial<br><em>Interest Form</em></h1>
+      <p class="ct-hero__sub">Help us understand your background so we can match you with upcoming Uroplug<sup>™</sup> studies. Takes about five minutes.</p>
+    </div>
+  </section>
+
+  <!-- ========== BODY ========== -->
+  <div class="ct-body">
+    <div class="ct-layout">
+
+      <!-- ── FORM ── -->
+      <main>
+        <div class="form-card">
+
+          <div class="success-panel" id="successPanel">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2>Thank you for your interest!</h2>
+            <p style="margin-top:var(--space-sm);">We've received your submission. A member of our research team will be in touch within 3–5 business days.</p>
+          </div>
+
+          <form id="intakeForm" novalidate>
+
+            <!-- 1. PERSONAL INFORMATION -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="label">Personal Information</span>
+                <div class="form-section-head__line"></div>
+              </div>
+              <div class="field-grid">
+                <div class="field">
+                  <label>First Name <span class="req">*</span></label>
+                  <input type="text" name="firstName" placeholder="Jane" required />
+                </div>
+                <div class="field">
+                  <label>Last Name <span class="req">*</span></label>
+                  <input type="text" name="lastName" placeholder="Smith" required />
+                </div>
+                <div class="field">
+                  <label>Date of Birth <span class="req">*</span></label>
+                  <input type="date" name="dob" required />
+                </div>
+                <div class="field">
+                  <label>Biological Sex at Birth</label>
+                  <select name="sex">
+                    <option value="">— Select —</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Intersex / Other</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label>Gender Identity</label>
+                  <select name="gender">
+                    <option value="">— Select —</option>
+                    <option>Man</option>
+                    <option>Woman</option>
+                    <option>Non-binary / Non-conforming</option>
+                    <option>Prefer to self-describe</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Race / Ethnicity</label>
+                  <select name="race">
+                    <option value="">— Select —</option>
+                    <option>Asian or Pacific Islander</option>
+                    <option>Black or African American</option>
+                    <option>Hispanic or Latino</option>
+                    <option>Middle Eastern or North African</option>
+                    <option>Native American or Alaska Native</option>
+                    <option>White or Caucasian</option>
+                    <option>Multiracial</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Preferred Language</label>
+                  <select name="language">
+                    <option value="">— Select —</option>
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>Mandarin</option>
+                    <option>Cantonese</option>
+                    <option>Vietnamese</option>
+                    <option>Tagalog</option>
+                    <option>Arabic</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. CONTACT -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="label">Contact Information</span>
+                <div class="form-section-head__line"></div>
+              </div>
+              <div class="field-grid">
+                <div class="field full">
+                  <label>Email Address <span class="req">*</span></label>
+                  <input type="email" name="email" placeholder="jane.smith@email.com" required />
+                </div>
+                <div class="field">
+                  <label>Phone Number</label>
+                  <input type="tel" name="phone" placeholder="(510) 555-0100" />
+                </div>
+                <div class="field">
+                  <label>Best Time to Reach You</label>
+                  <select name="contactTime">
+                    <option value="">— Select —</option>
+                    <option>Morning (8am–12pm)</option>
+                    <option>Afternoon (12pm–5pm)</option>
+                    <option>Evening (5pm–8pm)</option>
+                    <option>Any time</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Zip Code</label>
+                  <input type="text" name="zip" placeholder="94706" maxlength="10" />
+                  <span class="field-hint">Used only to assess proximity to our research sites.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. HEALTH BACKGROUND -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="label">Health Background</span>
+                <div class="form-section-head__line"></div>
+              </div>
+              <div class="field-grid">
+                <div class="field full">
+                  <label>Current Medical Conditions</label>
+                  <textarea name="conditions" placeholder="List any diagnosed conditions (e.g. overactive bladder, BPH, diabetes, hypertension)…"></textarea>
+                  <span class="field-hint">You are not required to disclose anything you're not comfortable sharing at this stage.</span>
+                </div>
+                <div class="field full">
+                  <label>Current Medications</label>
+                  <textarea name="medications" placeholder="List any prescription or OTC medications you regularly take…" style="min-height:76px;"></textarea>
+                </div>
+                <div class="field">
+                  <label>Known Allergies?</label>
+                  <div class="radio-group inline">
+                    <label class="radio-item"><input type="radio" name="allergies" value="yes" /> Yes</label>
+                    <label class="radio-item"><input type="radio" name="allergies" value="no" /> No</label>
+                    <label class="radio-item"><input type="radio" name="allergies" value="unsure" /> Unsure</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Currently Pregnant or Nursing?</label>
+                  <div class="radio-group inline">
+                    <label class="radio-item"><input type="radio" name="pregnant" value="yes" /> Yes</label>
+                    <label class="radio-item"><input type="radio" name="pregnant" value="no" /> No</label>
+                    <label class="radio-item"><input type="radio" name="pregnant" value="na" /> N/A</label>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label>Have you participated in a clinical trial before?</label>
+                  <div class="radio-group inline">
+                    <label class="radio-item"><input type="radio" name="priorTrial" value="yes" /> Yes</label>
+                    <label class="radio-item"><input type="radio" name="priorTrial" value="no" /> No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. STUDY PREFERENCES -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="label">Study Preferences</span>
+                <div class="form-section-head__line"></div>
+              </div>
+              <div class="field-grid">
+                <div class="field full">
+                  <label>Areas of Research Interest</label>
+                  <span class="field-hint" style="margin-bottom:0.5rem;">Select all that apply.</span>
+                  <div class="check-group">
+                    <label class="check-item"><input type="checkbox" name="interest" value="incontinence" /> Urinary Incontinence &amp; Bladder Control</label>
+                    <label class="check-item"><input type="checkbox" name="interest" value="urology" /> General Urology</label>
+                    <label class="check-item"><input type="checkbox" name="interest" value="cardio" /> Cardiovascular Health</label>
+                    <label class="check-item"><input type="checkbox" name="interest" value="diabetes" /> Diabetes &amp; Metabolic Disorders</label>
+                    <label class="check-item"><input type="checkbox" name="interest" value="neuro" /> Neurology &amp; Cognitive Health</label>
+                    <label class="check-item"><input type="checkbox" name="interest" value="mental" /> Mental Health &amp; Quality of Life</label>
+                    <label class="check-item"><input type="checkbox" name="interest" value="other" /> Other / Any</label>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label>Study Commitment Preference</label>
+                  <select name="commitment">
+                    <option value="">— Select —</option>
+                    <option>Single visit only</option>
+                    <option>Short-term (up to 3 months)</option>
+                    <option>Medium-term (3–12 months)</option>
+                    <option>Long-term (1+ years)</option>
+                    <option>No preference</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label>Can you attend in-person visits?</label>
+                  <div class="radio-group inline">
+                    <label class="radio-item"><input type="radio" name="inPerson" value="yes" /> Yes</label>
+                    <label class="radio-item"><input type="radio" name="inPerson" value="remote" /> Remote / telehealth only</label>
+                    <label class="radio-item"><input type="radio" name="inPerson" value="both" /> Either works</label>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label>Additional Comments or Questions</label>
+                  <textarea name="comments" placeholder="Anything else you'd like us to know about your interest in participating…"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. CONSENT & PRIVACY -->
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="label">Consent &amp; Privacy</span>
+                <div class="form-section-head__line"></div>
+              </div>
+
+              <div class="consent-callout">
+                <strong>What happens next?</strong>
+                <p>Submitting this form does not enroll you in any study. Our research coordinator will review your information and reach out only if you may qualify for a current or upcoming trial. Participation is always completely voluntary and you may withdraw at any time.</p>
+              </div>
+
+              <div class="privacy-note">
+                Your information is protected under HIPAA and our <a href="#">Privacy Policy</a>. We will never share your personal details with third parties without your explicit written consent.
+              </div>
+
+              <label class="consent-check">
+                <input type="checkbox" name="consentContact" id="cc1" required />
+                <span>I consent to being contacted by Urologic Design, LLC regarding research participation opportunities. <span class="req">*</span></span>
+              </label>
+
+              <label class="consent-check">
+                <input type="checkbox" name="consentData" id="cc2" required />
+                <span>I understand that my health information will be stored securely and used solely for the purpose of matching me with appropriate clinical studies. <span class="req">*</span></span>
+              </label>
+
+              <div class="submit-area">
+                <button type="submit" class="btn btn--accent btn--lg" style="display:inline-flex;align-items:center;gap:0.4rem;">
+                  Submit Interest Form <span class="arrow">→</span>
+                </button>
+                <p class="submit-disclaimer">Fields marked <span style="color:var(--color-accent)">*</span> are required. Submitting this form does not constitute enrollment in any study.</p>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </main>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="ct-sidebar">
+
+        <div class="info-card">
+          <h4>What to Expect</h4>
+          <ol class="steps-list">
+            <li>Submit this interest form — takes about 5 minutes.</li>
+            <li>Our coordinator reviews your profile against active studies.</li>
+            <li>If there's a potential match, we'll reach out within 3–5 business days.</li>
+            <li>A brief screening visit determines your eligibility.</li>
+            <li>You decide — participation is always your choice.</li>
+          </ol>
+        </div>
+
+        <div class="info-card info-card--accent">
+          <h4>Why Participate?</h4>
+          <ul>
+            <li>Access to investigational treatments before broad availability</li>
+            <li>Close monitoring by a dedicated clinical team</li>
+            <li>Contribute to meaningful advances in urology</li>
+            <li>Compensation may be available for time and travel</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>Get in Touch</h4>
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-detail">
+              <strong>Email</strong>
+              <span><a href="mailto:research@urologicdesign.com">research@urologicdesign.com</a></span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.15 3.55 2 2 0 0 1 3.13 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-detail">
+              <strong>Phone</strong>
+              <span><a href="tel:+15105550100">(510) 555-0100</a></span>
+              <span style="display:block;font-size:0.78rem;color:var(--color-medium-gray);">Mon–Fri, 8am–5pm PT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h4>Your Rights as a Participant</h4>
+          <ul>
+            <li>Withdraw at any time, for any reason, without penalty</li>
+            <li>Full informed consent before any study begins</li>
+            <li>Confidential handling of all health data under HIPAA</li>
+            <li>No obligation to participate after submitting this form</li>
+          </ul>
+          <p style="margin-top:var(--space-sm);">
+            <a href="clinical-trials.html">Learn more about participant protections →</a>
+          </p>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <div class="nav__logo-mark">
+              <img src="https://res.cloudinary.com/dcuyxe2sd/image/upload/v1769559521/UROLOGIC_DESIGN_LOGO_Hi-res_Transparent-BG_State-2_nfcqwc.png" alt="Uroplug Logo">
+            </div>
+            Uroplug
+          </a>
+          <p class="text-sm" style="max-width: 300px;">Next-generation therapeutic devices for chronic disease management. Designed for patients.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Company</h4>
+          <ul class="footer__links">
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="clinical-trials.html">Clinical Trials</a></li>
+            <li><a href="patents.html">Patents</a></li>
+            <li><a href="team.html">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Investors</h4>
+          <ul class="footer__links">
+            <li><a href="investors.html">Overview</a></li>
+            <li><a href="investors.html#faq">FAQ</a></li>
+            <li><a href="mailto:info@urologicdesign.com">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <ul class="footer__links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Urologic Design, LLC. All rights reserved.</span>
+        <div class="footer__legal">
+          <span>Not for commercial distribution</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/scripts.js"></script>
+  <script>
+    /* Nav scroll behavior */
+    const nav = document.querySelector('.nav');
+    if (nav) {
+      const onScroll = () => nav.classList.toggle('nav--scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    /* Form submission */
+    const form = document.getElementById('intakeForm');
+    const successPanel = document.getElementById('successPanel');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      form.querySelectorAll('[required]').forEach(el => {
+        if (el.type === 'checkbox') {
+          const lbl = el.closest('label');
+          if (!el.checked) { lbl.style.color = '#c0392b'; valid = false; }
+          else { lbl.style.color = ''; }
+        } else {
+          el.classList.remove('field-error');
+          if (!el.value.trim()) { el.classList.add('field-error'); valid = false; }
+        }
+      });
+
+      if (!valid) {
+        const first = form.querySelector('.field-error');
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // TODO: replace with real backend POST
+      // const data = new FormData(form);
+      // await fetch('/api/clinical-trial-interest', { method: 'POST', body: data });
+
+      form.style.display = 'none';
+      successPanel.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
