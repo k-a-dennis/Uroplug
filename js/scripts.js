@@ -308,9 +308,9 @@ function initRoadmap() {
 
   var STAGES = [
     { id: 'pre',  label: 'Pre-seed', time: 'Complete',            done: false },
-    { id: 'seed', label: 'Seed',     time: 'Q3 2026 → Q2 2027',   done: false },
-    { id: 'a',    label: 'Series A', time: 'Q2 2027 → Q1 2028',   done: false },
-    { id: 'b',    label: 'Series B', time: 'Q1 2028 → Q1 2029',   done: false },
+    { id: 'seed', label: 'Seed',     time: 'Q1 2027 → Q4 2027',   done: false },
+    { id: 'a',    label: 'Series A', time: 'Q1 2028 → Q4 2028',   done: false },
+    { id: 'b',    label: 'Series B', time: 'Q1 2029 → Beyond',   done: false },
   ];
 
   // position: 'above' | 'below'
