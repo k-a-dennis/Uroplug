@@ -1537,7 +1537,7 @@ p2 {
 /* Label: small mono uppercase */
 .hero-summary__label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
