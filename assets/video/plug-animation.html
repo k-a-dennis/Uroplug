@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device Animation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: transparent; }
+    canvas {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 640, H = 480;
+canvas.width = W;
+canvas.height = H;
+
+const CY = H / 2 - 18;
+const TUBE_H = 80;
+const TUBE_TOP = CY - TUBE_H / 2;
+const TUBE_BOT = CY + TUBE_H / 2;
+const TUBE_LEFT = 148;
+const TUBE_RIGHT = 500;
+const TUBE_W = TUBE_RIGHT - TUBE_LEFT;
+
+const DEVICE_H_MIN = 54;
+const DEVICE_H_MAX = TUBE_H - 4;
+const DEVICE_LEN = 140;
+const DEVICE_RIGHT_REST = TUBE_LEFT + 152;
+const DEVICE_LEFT_REST = DEVICE_RIGHT_REST - DEVICE_LEN;
+const STRING_STRANDS = 8;
+
+const TOTAL = 420;
+const PHASE_HOLD1 = 60;
+const PHASE_DISSOLVE = 60;
+const PHASE_EXPAND = 180;
+
+function ease(x) {
+  return x < 0.5 ? 4*x*x*x : 1 - Math.pow(-2*x+2,3)/2;
+}
+
+function drawRoundedRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function draw(frame) {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#e8e8e8';
+  ctx.fillRect(0, 0, W, H);
+
+  const lf = frame % TOTAL;
+  let dissolveAlpha = 0, expandT = 0;
+  if (lf < PHASE_HOLD1) {
+    dissolveAlpha = 0; expandT = 0;
+  } else if (lf < PHASE_HOLD1 + PHASE_DISSOLVE) {
+    dissolveAlpha = (lf - PHASE_HOLD1) / PHASE_DISSOLVE; expandT = 0;
+  } else if (lf < PHASE_HOLD1 + PHASE_DISSOLVE + PHASE_EXPAND) {
+    dissolveAlpha = 1;
+    expandT = ease((lf - PHASE_HOLD1 - PHASE_DISSOLVE) / PHASE_EXPAND);
+  } else {
+    dissolveAlpha = 1; expandT = 1;
+  }
+
+  const deviceH = DEVICE_H_MIN + (DEVICE_H_MAX - DEVICE_H_MIN) * expandT;
+  const deviceTop = CY - deviceH / 2;
+  const deviceBot = CY + deviceH / 2;
+  const deviceLeft = DEVICE_LEFT_REST;
+  const deviceRight = DEVICE_RIGHT_REST;
+
+  // lumen fill
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(TUBE_LEFT, TUBE_TOP, TUBE_W, TUBE_H);
+  ctx.clip();
+  ctx.fillStyle = 'rgba(30,90,45,0.13)';
+  ctx.fillRect(TUBE_LEFT, TUBE_TOP, TUBE_W, TUBE_H);
+  ctx.restore();
+
+  // wall glow
+  ctx.strokeStyle = 'rgba(60,140,80,0.22)';
+  ctx.lineWidth = 13;
+  ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(TUBE_LEFT, TUBE_TOP); ctx.lineTo(TUBE_RIGHT, TUBE_TOP); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(TUBE_LEFT, TUBE_BOT); ctx.lineTo(TUBE_RIGHT, TUBE_BOT); ctx.stroke();
+  ctx.lineCap = 'butt';
+
+  // wall lines
+  ctx.strokeStyle = 'rgba(60,140,80,0.85)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(TUBE_LEFT, TUBE_TOP); ctx.lineTo(TUBE_RIGHT, TUBE_TOP); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(TUBE_LEFT, TUBE_BOT); ctx.lineTo(TUBE_RIGHT, TUBE_BOT); ctx.stroke();
+
+  // center dash
+  ctx.strokeStyle = 'rgba(60,140,80,0.15)';
+  ctx.lineWidth = 0.75;
+  ctx.setLineDash([4, 8]);
+  ctx.beginPath(); ctx.moveTo(TUBE_LEFT, CY); ctx.lineTo(TUBE_RIGHT, CY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // gelatin casing
+  if (dissolveAlpha < 1) {
+    const alpha = 1 - dissolveAlpha;
+    const pad = 6;
+    const gL = deviceLeft - pad, gR = deviceRight + pad;
+    const gT = Math.max(deviceTop - pad, TUBE_TOP + 1);
+    const gB = Math.min(deviceBot + pad, TUBE_BOT - 1);
+    const gRx = (gB - gT) / 2;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(TUBE_LEFT, TUBE_TOP, TUBE_W, TUBE_H);
+    ctx.clip();
+    drawRoundedRect(gL, gT, gR - gL, gB - gT, gRx);
+    ctx.fillStyle = `rgba(80,180,120,${alpha * 0.15})`;
+    ctx.fill();
+    ctx.strokeStyle = `rgba(80,190,130,${alpha * 0.7})`;
+    ctx.lineWidth = 1.3;
+    ctx.setLineDash([4, 3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    if (dissolveAlpha > 0.3) {
+      const pa = (dissolveAlpha - 0.3) / 0.7;
+      const seed = Math.floor(lf / 2);
+      ctx.fillStyle = `rgba(80,190,130,${pa * 0.55})`;
+      for (let i = 0; i < 10; i++) {
+        const gW = gR - gL, gH = gB - gT;
+        const px = gL + ((i * 137 + seed * 31) % gW);
+        const py = gT + ((i * 97 + seed * 17) % gH);
+        ctx.beginPath();
+        ctx.arc(px, py, 1 + (i % 3), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  // device body
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(TUBE_LEFT, TUBE_TOP + 2, TUBE_W, TUBE_H - 4);
+  ctx.clip();
+
+  const dRx = deviceH / 2;
+  drawRoundedRect(deviceLeft, deviceTop, deviceRight - deviceLeft, deviceH, dRx);
+  ctx.fillStyle = 'rgba(248,250,253,0.97)';
+  ctx.fill();
+
+  const sheen = ctx.createLinearGradient(deviceLeft, deviceTop, deviceLeft, deviceBot);
+  sheen.addColorStop(0,    'rgba(255,255,255,0.5)');
+  sheen.addColorStop(0.35, 'rgba(255,255,255,0.0)');
+  sheen.addColorStop(1,    'rgba(200,210,220,0.1)');
+  ctx.fillStyle = sheen;
+  drawRoundedRect(deviceLeft, deviceTop, deviceRight - deviceLeft, deviceH, dRx);
+  ctx.fill();
+
+  ctx.strokeStyle = 'rgba(180,195,210,0.55)';
+  ctx.lineWidth = 1;
+  drawRoundedRect(deviceLeft, deviceTop, deviceRight - deviceLeft, deviceH, dRx);
+  ctx.stroke();
+
+  if (expandT > 0) {
+    ctx.strokeStyle = 'rgba(160,180,200,0.2)';
+    ctx.lineWidth = 0.75;
+    const innerW = (deviceRight - deviceLeft) - 2 * dRx;
+    for (let i = 1; i < 4; i++) {
+      const lx = deviceLeft + dRx + innerW * (i / 4);
+      ctx.beginPath(); ctx.moveTo(lx, deviceTop + 6); ctx.lineTo(lx, deviceBot - 6); ctx.stroke();
+    }
+  }
+  ctx.restore();
+
+  // removal string
+  const sx = deviceLeft;
+  const ex = TUBE_LEFT - 8;
+  const strLen = sx - ex;
+
+  ctx.save();
+  ctx.lineCap = 'round';
+
+  ctx.strokeStyle = 'rgba(180,190,200,0.35)';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  ctx.moveTo(sx, CY);
+  ctx.bezierCurveTo(sx - strLen * 0.35, CY + 7, sx - strLen * 0.65, CY + 5, ex, CY + 3);
+  ctx.stroke();
+
+  ctx.strokeStyle = 'rgba(252,253,255,0.95)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(sx, CY);
+  ctx.bezierCurveTo(sx - strLen * 0.35, CY + 7, sx - strLen * 0.65, CY + 5, ex, CY + 3);
+  ctx.stroke();
+
+  for (let i = 0; i < STRING_STRANDS; i++) {
+    const progress = i / (STRING_STRANDS - 1);
+    const bx = sx - strLen * progress;
+    const mainY = CY + (progress < 0.5
+      ? progress * 2 * 7
+      : (1 - (progress - 0.5) * 2) * 7 + (progress - 0.5) * 2 * 5);
+    const tick = (i % 2 === 0) ? 2.5 : -2.5;
+    ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(bx, mainY - tick);
+    ctx.lineTo(bx, mainY + tick);
+    ctx.stroke();
+  }
+
+  ctx.beginPath();
+  ctx.arc(ex, CY + 3, 4.5, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(252,253,255,0.95)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(200,210,220,0.7)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.restore();
+
+  // phase labels
+  const phase = lf < PHASE_HOLD1 ? 0 :
+                lf < PHASE_HOLD1 + PHASE_DISSOLVE ? 1 :
+                lf < PHASE_HOLD1 + PHASE_DISSOLVE + PHASE_EXPAND ? 2 : 3;
+
+  const labels = ['Inserted', 'Dissolving', 'Expanding', 'Occluded'];
+  const dotY = TUBE_BOT + 36;
+  const DOT_R = 4;
+  const DOT_TEXT_GAP = 7;
+  const FONT_SIZE = 24;
+  const ITEM_GAP = 32;
+
+  ctx.font = `500 ${FONT_SIZE}px system-ui,sans-serif`;
+  const textWidths = labels.map(l => ctx.measureText(l).width);
+  const itemWidths = textWidths.map(tw => DOT_R * 2 + DOT_TEXT_GAP + tw);
+  const totalW = itemWidths.reduce((a, b) => a + b, 0) + ITEM_GAP * (labels.length - 1);
+  let cursor = W / 2 - totalW / 2;
+
+  labels.forEach((l, i) => {
+    const active = i === phase;
+    const dotX = cursor + DOT_R;
+    const textX = cursor + DOT_R * 2 + DOT_TEXT_GAP;
+
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, DOT_R, 0, Math.PI * 2);
+    ctx.fillStyle = active ? 'rgba(60,140,80,0.9)' : 'rgba(140,150,140,0.35)';
+    ctx.fill();
+
+    ctx.font = active ? `500 ${FONT_SIZE}px system-ui,sans-serif` : `400 ${FONT_SIZE}px system-ui,sans-serif`;
+    ctx.fillStyle = active ? 'rgba(40,100,55,0.95)' : 'rgba(120,130,120,0.55)';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(l, textX, dotY);
+
+    cursor += itemWidths[i] + ITEM_GAP;
+  });
+}
+
+let frame = 0;
+function loop() { draw(frame++); requestAnimationFrame(loop); }
+loop();
+</script>
+</body>
+</html>
