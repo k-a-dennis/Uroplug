@@ -1,4 +1,4 @@
-# 🚀 Uroplug Website
+# ![alt text](assets/logos/logoimg.png) Uroplug Website
 A sleek, static website for Uroplug, a developing medical device to treat chronic urinary incontinence.
 
 [View Live Demo](https://github.com/k-a-dennis/Uroplug)
