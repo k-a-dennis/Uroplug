@@ -15,7 +15,7 @@ A sleek, static website for Uroplug, a developing medical device to treat chroni
 * **JavaScript:** Parallax, scroll reveal animations, and count-up animations.
 
 ## Screenshot
-![Project Screenshot](./path-to-image/screenshot.png)
+![Project Screenshot](assets/imgs/sshomepage.png)
 
 ## Getting Started
 To run this project locally:
